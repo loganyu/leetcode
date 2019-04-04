@@ -23,10 +23,7 @@ A is sorted in non-decreasing order.
 # @return {Integer[]}
 def sorted_squares(a)
     n = a.length
-    j = 0
-    while j < n && a[j] < 0
-        j += 1
-    end
+    j = find_first_non_neg(a)
     i = j - 1
     
     ans = []
@@ -49,4 +46,22 @@ def sorted_squares(a)
     end
     
     ans
+end
+
+def find_first_non_neg(a)
+  l = 0
+  r = a.length - 1
+  m = -1
+
+  while l <= r
+    m = (l+r)/2
+    if a[m] >= 0 && a[m - 1] < 0
+      break
+    elsif a[m] < 0
+      l = m + 1
+    else
+      r = m - 1
+    end
+
+    m
 end
