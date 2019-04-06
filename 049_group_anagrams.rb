@@ -1,0 +1,33 @@
+=begin
+Given an array of strings, group anagrams together.
+
+Example:
+
+Input: ["eat", "tea", "tan", "ate", "nat", "bat"],
+Output:
+[
+  ["ate","eat","tea"],
+  ["nat","tan"],
+  ["bat"]
+]
+Note:
+
+All inputs will be in lowercase.
+The order of your output does not matter.
+=end
+
+# @param {String[]} strs
+# @return {String[][]}
+def group_anagrams(strs)
+    anagrams_by_char_count = {}
+    strs.each do |str|
+        count = Array.new(26, 0)
+        str.each_char do |char|
+            count[char.ord - 'a'.ord] += 1
+        end
+        anagrams_by_char_count[count] ||= []
+        anagrams_by_char_count[count] << str
+    end
+    
+    anagrams_by_char_count.values
+end
