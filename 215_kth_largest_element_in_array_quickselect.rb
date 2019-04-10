@@ -17,16 +17,40 @@ You may assume k is always valid, 1 ≤ k ≤ array's length.
 # @param {Integer} k
 # @return {Integer}
 def find_kth_largest(nums, k)
+    left = 0
+    right = nums.length - 1
+    k_smallest = nums.length - k
     loop do
-        pivot = nums.delete_at(rand(nums.length))
-        left, right = nums.partition{|num| num > pivot}
-        if k == left.length + 1
-            return pivot
-        elsif k < left.length + 1
-            nums = left
+        if left == right
+            return nums[left]
+        end
+        pivot_index = left + rand(right - left)
+        pivot_index = partition(nums, left, right, pivot_index)
+        if k_smallest == pivot_index
+            return nums[k_smallest]
+        elsif k_smallest < pivot_index
+            right = pivot_index - 1
         else
-            k = k - left.length - 1
-            nums = right
+            left = pivot_index + 1
         end
     end
+end
+
+def partition(nums, left, right, pivot_index)
+    pivot = nums[pivot_index]
+    swap(nums, pivot_index, right)
+    store_index = left
+    (left).upto(right).each do |i|
+        if nums[i] < pivot
+            swap(nums, store_index, i)
+            store_index += 1
+        end
+    end
+    swap(nums, store_index, right)
+
+    return store_index
+end
+
+def swap(nums, i, j)
+    nums[i], nums[j] = nums[j], nums[i]
 end
