@@ -40,13 +40,13 @@ def k_closest(points, k)
 end
 
 def sort(i, j, k, points)
-   if i >= j
-       return
-   end
+    if i >= j
+        return
+    end
     
     r = rand(i..j)
     points[i], points[r] = points[r], points[i]
-    
+
     mid = partition(i, j, points)
     left_length = mid - i + 1
     if k < left_length
