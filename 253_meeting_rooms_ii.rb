@@ -37,10 +37,10 @@ def min_meeting_rooms(intervals)
     
     while start_pointer < l
         if start_timings[start_pointer] >= end_timings[end_pointer]
-            used_rooms -= 1
             end_pointer += 1
+        else
+            used_rooms += 1
         end
-        used_rooms += 1
         start_pointer += 1
     end
     
