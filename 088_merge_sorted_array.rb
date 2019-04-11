@@ -36,9 +36,4 @@ def merge(nums1, m, nums2, n)
     if n >= 0
         nums1[0..i] = nums2[0..i]
     end
-    while(n >=0 )
-        nums1[i] = nums2[n]
-        n -= 1
-        i -= 1
-    end
 end
