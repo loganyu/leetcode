@@ -87,15 +87,13 @@ class LRUCache
             node = Node.new(key, value)
             @cache[key] = node
             add_node(node)
-        end
-        
-        if @cache.count > @capacity
-            @cache.delete(@tail.prev.key)
-            pop_tail()
+       
+            if @cache.count > @capacity
+                @cache.delete(@tail.prev.key)
+                pop_tail()
+            end
         end
     end
-
-
 end
 
 # Your LRUCache object will be instantiated and called as such:
