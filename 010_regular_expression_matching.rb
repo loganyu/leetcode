@@ -64,9 +64,9 @@ def is_match_a(i, j, s, p)
   return i == s.length if j == p.length
   first = i < s.length && [s[i], '.'].include?(p[j])
   if p[j+1] == '*'
-    is_match(i, j+2, s, p) || (first && is_match(i+1, j, s, p))
+    is_match_a(i, j+2, s, p) || (first && is_match_a(i+1, j, s, p))
   else
-    first && is_match(i+1, j+1, s, p)
+    first && is_match_a(i+1, j+1, s, p)
   end
 end
 
