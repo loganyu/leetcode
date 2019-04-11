@@ -39,7 +39,7 @@ def least_interval(tasks, n)
             time += 1
             i += 1
         end
-        counts.sort!{|x,y| -(x <=> y)}
+        counts.sort!{|x,y| y <=> x}
     end
     
     time
@@ -52,5 +52,5 @@ def get_counts_of_tasks(tasks)
         counts[task] += 1
     end
     
-    counts.values.sort {|x,y| -x <=> y}
+    counts.values.sort {|x,y| y <=> x}
 end
