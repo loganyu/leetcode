@@ -27,7 +27,7 @@ end
 
 def backtrack(output, nums, n, first)
     if first == n
-        output.push(nums)
+        output.push(nums.dup)
     end
     first.upto(n-1).each do |i|
         nums[first], nums[i] = nums[i], nums[first]
