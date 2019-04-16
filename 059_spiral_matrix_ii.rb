@@ -50,6 +50,14 @@ def generate_matrix(n)
     return matrix
 end
 
+def is_invalid?(m, r, c)
+  return r < 0 || 
+      c < 0 ||
+      r >= m.length ||
+      c >= m.length ||
+      !m[r][c].nil?
+end
+
 generate_matrix(5).each do |r|
   puts r.inspect
 end
