@@ -29,16 +29,9 @@ def num_unique_emails(emails)
     emails.each do |email|
         filtered_name = ''
         local_name, domain = email.split('@')
-        local_name.each_char do |char|
-            if char == '.'
-                next
-            elsif char == '+'
-                break
-            else
-                filtered_name += char
-            end
-        end
-        unique_emails << "#{filtered_name}@#{domain}"
+        local_name = local_name.split('+')[0]
+        local_name = local_name.split('.').join
+        unique_emails << "#{local_name}@#{domain}"
     end
     
     unique_emails.count
