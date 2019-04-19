@@ -1,3 +1,18 @@
+=begin
+Given a 2D binary matrix filled with 0's and 1's, find the largest rectangle containing only 1's and return its area.
+
+Example:
+
+Input:
+[
+  ["1","0","1","0","0"],
+  ["1","0","1","1","1"],
+  ["1","1","1","1","1"],
+  ["1","0","0","1","0"]
+]
+Output: 6
+=end
+
 # @param {Character[][]} matrix
 # @return {Integer}
 def maximal_rectangle(matrix)
@@ -24,56 +39,34 @@ def maximal_rectangle(matrix)
   return largest_overall
 end
 
-
-=begin
-Given a 2D binary matrix filled with 0's and 1's, find the largest rectangle containing only 1's and return its area.
-
-Example:
-
-Input:
-[
-  ["1","0","1","0","0"],
-  ["1","0","1","1","1"],
-  ["1","1","1","1","1"],
-  ["1","0","0","1","0"]
-]
-Output: 6
-=end
-
 # @param {Integer[]} heights
 # @return {Integer}
 def largest_rectangle_area(heights)
   stack = []
   max_area = 0
-  area = 0
   i = 0
-  while i < heights.length do
+  while i < heights.length
     if stack.empty? || heights[stack.last] <= heights[i]
       stack.push(i)
       i += 1
     else
-      top = stack.pop()
-      if stack.empty?
-        area = heights[top] * i
-      else
-        area = heights[top] * (i - stack.last - 1)
-      end
-      if area > max_area
-        max_area = area
-      end
+      max_area = pop_from_stack_and_get_max_area(stack, heights, i, max_area)
     end
   end
   while !stack.empty?
+    max_area = pop_from_stack_and_get_max_area(stack, heights, i, max_area)
+  end
+    
+  return max_area
+end
+
+def pop_from_stack_and_get_max_area(stack, heights, i, max_area)
     top = stack.pop()
     if stack.empty?
       area = heights[top] * i
     else
       area = heights[top] * (i - stack.last - 1)
     end
-    if area > max_area
-      max_area = area
-    end
-  end
     
-  return max_area
+    return [max_area, area].max
 end
