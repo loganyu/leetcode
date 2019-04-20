@@ -53,7 +53,6 @@ def ladder_length(begin_word, end_word, word_list)
         end
     end
     
-    
     queue = [[begin_word, 1]]
     visited = {begin_word => true}
     
@@ -71,7 +70,7 @@ def ladder_length(begin_word, end_word, word_list)
                         queue.push([word, level + 1])
                     end
                 end
-                all_combo_dict[intermediate_word] = []
+                all_combo_dict[intermediate_word] = nil
             end
         end
     end
