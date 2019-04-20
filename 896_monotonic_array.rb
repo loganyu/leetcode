@@ -16,7 +16,10 @@ def is_monotonic(a)
         elsif a[i] < a[i+1]
             decreasing = false
         end
+        if !increasing && !decreasing
+            return false
+        end
     end
     
-    return increasing || decreasing
+    return true
 end
