@@ -23,25 +23,22 @@ Explanation: It could be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
 # @return {Integer}
 def num_decodings(s)
     n = s.length
-    if n == 0
+    if n == 0 || s[0] == '0'
         return 0
     end
     
-    memo = []
-    memo[n] = 1
-    memo[n-1] = s[n-1] != '0' ? 1 : 0
-    
-    (n-2).downto(0).each do |i|
-       if s[i] == '0'
-           memo[i] = 0
-       else
-           if  (s[i..i+1].between?('1', '26'))
-               memo[i] = memo[i+1] + memo[i+2]
-           else
-               memo[i] = memo[i+1]
-           end
-       end
+    curr = prev = 1
+    (1...n).each do |i|
+        if s[i] == '0'
+            curr = 0
+        end
+        if s[i-1..i].between?('1', '26')
+            curr = curr + prev
+            prev = curr - prev
+        else
+            prev = curr
+        end
     end
     
-    return memo[0]    
+    return curr
 end
