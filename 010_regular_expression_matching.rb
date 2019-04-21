@@ -70,12 +70,12 @@ def is_match_a(i, j, s, p)
   end
 end
 
-# dynamic programming
+# dynamic programming bottom up
 def is_match(s, p)
   dp = Array.new(s.length+1) { Array.new(p.length+1, false) }
   m, n = s.length, p.length
   dp[m][n] = true
-  m.downto(0) do |i| 
+  m.downto(0) do |i|
     (n-1).downto(0) do |j| 
       first = i < m && (s[i] == p[j] || p[j] == '.')
       if p[j+1] == '*'
@@ -87,7 +87,6 @@ def is_match(s, p)
   end
   dp[0][0]
 end
-
 
 s = "aab"
 p = "a*"
