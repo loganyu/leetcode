@@ -23,60 +23,27 @@ Output: -1
 # @param {Integer} target
 # @return {Integer}
 def search(nums, target)
-    if nums.length == 0
-        return -1
-    end
-    if nums.length == 1
-        if nums[0] == target
-            return 0
-        else
-            return -1
-        end
-    end
-    rotate_index = find_rotate_index(nums)
-    if nums[rotate_index] == target
-        return rotate_index
-    end
-    if rotate_index == 0
-        return binary_search(0, nums.length - 1, target, nums)
-    elsif target < nums[0]
-        return binary_search(rotate_index, nums.length - 1, target, nums)
-    else
-        return binary_search(0, rotate_index, target, nums)
-    end
-end
-
-def find_rotate_index(nums)
     l = 0
     r = nums.length - 1
-    if nums[l] < nums[r]
-        return 0
-    end
-    while (l <= r)
-        p = (l + r)/2
-        if nums[p] > nums[p+1]
-            return p + 1
-        else
-            if nums[p] < nums[l]
-                r = p - 1
+    while l <= r
+        m = r - (r-l)/2
+        if nums[m] == target
+            return m
+        end
+        if nums[l] <= nums[m]
+            if target.between?(nums[l], nums[m])
+                r = m - 1
             else
-                l = p + 1
+                l = m + 1
+            end
+        else
+            if target.between?(nums[m], nums[r])
+                l = m + 1
+            else
+                r = m - 1
             end
         end
     end
-end
-
-def binary_search(l, r, t, nums)
-    while (l <= r)
-        p = (l+r)/2
-        if nums[p] == t
-            return p
-        elsif t < nums[p]
-            r = p - 1
-        else
-            l = p + 1
-        end
-    end
     
-    return -1        
+    return -1
 end
