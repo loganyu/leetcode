@@ -18,7 +18,7 @@ s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
 # @return {String}
 def decode_string(s)
     stack = []
-    stack.push(["", 1])
+    stack.push(["", nil])
     num = ""
     s.each_char do |char|
        if char =~ /\d/
