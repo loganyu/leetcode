@@ -21,7 +21,7 @@ def next_permutation(nums)
     end
     if i >= 0
         j = nums.length - 1
-        while (j >= i && nums[j] <= nums[i])
+        while nums[j] <= nums[i]
             j -= 1
         end
         nums[i], nums[j] = nums[j], nums[i]
