@@ -23,43 +23,22 @@ Explanation: 342 + 465 = 807.
 # @param {ListNode} l2
 # @return {ListNode}
 def add_two_numbers(l1, l2)
-    sum = l1.val + l2.val
-    carry_over = sum / 10
-    val = sum % 10
-    lf = lp = ListNode.new(val)
-    l1 = l1.next
-    l2 = l2.next
-    loop do
-        sum = carry_over
+    prehead = curr = ListNode.new(nil)
+    carry = 0
+    while !l1.nil? || !l2.nil? || carry > 0
+        x = !l1.nil? ? l1.val : 0
+        y = !l2.nil? ? l2.val : 0
+        sum = carry + x + y
+        carry = sum / 10
+        curr.next = ListNode.new(sum % 10)
+        curr = curr.next
         if !l1.nil?
-            sum += l1.val
             l1 = l1.next
         end
         if !l2.nil?
-            sum += l2.val
             l2 = l2.next
-        end
-        if l1.nil? && l2.nil?
-            break
-        end
-        carry_over = sum / 10
-        val = sum % 10
-        lc = ListNode.new(val)
-        lp.next = lc
-        lp = lc
-    end
-    if sum > 0
-        carry_over = sum / 10
-        val = sum % 10
-        lc = ListNode.new(val)
-        lp.next = lc
-        lp = lc
-
-        if carry_over > 0
-            lc = ListNode.new(carry_over)
-            lp.next = lc
         end
     end
     
-    return lf
+    return prehead.next
 end
