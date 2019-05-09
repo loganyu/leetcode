@@ -31,7 +31,6 @@ A solution set is:
 # @return {Integer[][]}
 def combination_sum(candidates, target)
     answers = []
-    candidates = candidates.sort
     search(candidates, target, answers, [], 0)
     
     return answers
