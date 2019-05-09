@@ -18,20 +18,19 @@ Output:
 # @param {Integer[]} nums
 # @return {Integer[][]}
 def permute(nums)
-    n = nums.length
     output = []
-    backtrack(output, nums, n, 0)
+    backtrack(output, nums, 0)
     
     return output
 end
 
-def backtrack(output, nums, n, first)
-    if first == n
+def backtrack(output, nums, first)
+    if first == nums.length
         output.push(nums.dup)
     end
-    first.upto(n-1).each do |i|
+    first.upto(nums.length - 1).each do |i|
         nums[first], nums[i] = nums[i], nums[first]
-        backtrack(output, nums, n, first + 1)
+        backtrack(output, nums, first + 1)
         nums[first], nums[i] = nums[i], nums[first]
     end
 end
