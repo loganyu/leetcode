@@ -28,7 +28,7 @@ def trap(height)
     (length - 2).downto(0).each do |i|
         right_max[i] = [right_max[i+1], height[i]].max
     end
-    1.upto(length - 1).each do |i|
+    1.upto(length - 2).each do |i|
         ans += [left_max[i], right_max[i]].min - height[i]
     end
     
