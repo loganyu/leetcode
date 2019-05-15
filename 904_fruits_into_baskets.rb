@@ -53,7 +53,7 @@ def total_fruit(tree)
             end
             i += 1
         end
-        ans = [ans, j - i + 1].max
+        ans = [ans, count.values.sum].max
     end
     
     return ans
