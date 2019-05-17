@@ -47,3 +47,15 @@ def rotated_digits(n)
     return count
 end
 
+# @param {Integer} n
+# @return {Integer}
+def rotated_digits(n)
+    count = 0
+    ('0'..n.to_s).each do |num|
+        if num.to_s !~ /[347]/ && num.to_s =~ /[2569]/
+            count += 1
+        end
+    end
+    
+    return count
+end
