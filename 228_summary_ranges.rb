@@ -16,6 +16,9 @@ Explanation: 2,3,4 form a continuous range; 8,9 form a continuous range.
 # @param {Integer[]} nums
 # @return {String[]}
 def summary_ranges(nums)
+    if nums.empty?
+        return []
+    end
     summary = []
     prev_num = nil
     range_start = nil
@@ -28,9 +31,7 @@ def summary_ranges(nums)
         end
         prev_num = num
     end
-    if !range_start.nil?
-        add_range_to_summary(range_start, prev_num, summary)
-    end
+    add_range_to_summary(range_start, prev_num, summary)
 
     return summary
 end
@@ -42,3 +43,4 @@ def add_range_to_summary(range_start, prev_num, summary)
         summary << "#{range_start}->#{prev_num}"
     end
 end
+
