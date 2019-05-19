@@ -32,6 +32,25 @@ Note:
 # @param {Integer} n
 # @return {Integer}
 def fib(n)
+    first = 0
+    second = 1
+    if n == 0
+        return first
+    elsif n == 1
+        return second
+    end
+    (2).upto(n).each do |i|
+        third = first + second
+        first = second
+        second = third
+    end
+    
+    second 
+end
+
+# @param {Integer} n
+# @return {Integer}
+def fib(n)
     fibs = [0,1]
     (2).upto(n).each do |i|
        fibs << fibs[i-2] + fibs[i-1] 
