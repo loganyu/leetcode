@@ -42,8 +42,8 @@ def max_dist_to_closest(seats)
             while right < n && seats[right] == 0 || right < i
                 right += 1
             end
-            left_dist = left == -1 ? n : i - left
-            right_dist = right == n ? n : right - i
+            left_dist = left == -1 ? Float::INFINITY : i - left
+            right_dist = right == n ? Float::INFINITY : right - i
             
             max = [max, [left_dist, right_dist].min].max
         end
