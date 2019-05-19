@@ -18,6 +18,24 @@ Output: 99
 # @param {Integer[]} nums
 # @return {Integer}
 def single_number(nums)
+    map = {}
+    nums.each do |num|
+        if map[num]
+            map[num] += 1
+            if map[num] == 3
+                map.delete(num)
+            end
+        else
+            map[num] = 1
+        end
+    end
+    
+    map.keys[0]
+end
+
+# @param {Integer[]} nums
+# @return {Integer}
+def single_number(nums)
     ones = twos = 0
     nums.each do |num|
         ones = (ones ^ num) & ~twos
