@@ -1,18 +1,3 @@
-=begin
-Given a 2D binary matrix filled with 0's and 1's, find the largest rectangle containing only 1's and return its area.
-
-Example:
-
-Input:
-[
-  ["1","0","1","0","0"],
-  ["1","0","1","1","1"],
-  ["1","1","1","1","1"],
-  ["1","0","0","1","0"]
-]
-Output: 6
-=end
-
 # @param {Character[][]} matrix
 # @return {Integer}
 def maximal_rectangle(matrix)
@@ -31,13 +16,12 @@ def maximal_rectangle(matrix)
     end
     
     largest = largest_rectangle_area(histogram)
-    if largest > largest_overall
-      largest_overall = largest
-    end
+    largest_overall = [largest_overall, largest].max
   end
   
   return largest_overall
 end
+
 
 # @param {Integer[]} heights
 # @return {Integer}
