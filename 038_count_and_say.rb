@@ -30,7 +30,7 @@ Output: "1211"
 # @return {String}
 def count_and_say(n)
     counts = [[nil], [1]]
-    1.upto(n) do |i|
+    1.upto(n-1) do |i|
         count = []
         n_cur = nil
         n_count = 0
