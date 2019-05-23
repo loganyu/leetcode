@@ -24,7 +24,6 @@ Explanation: The answer is "wke", with the length of 3.
 def length_of_longest_substring(s)
     seen = {}
     back_idx = 0
-    current_count = 0
     max_count = 0
     
     (0..s.size - 1).each do |idx|
