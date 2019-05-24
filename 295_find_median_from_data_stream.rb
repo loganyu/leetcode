@@ -71,3 +71,45 @@ end
 # obj.add_num(num)
 # param_2 = obj.find_median()
 
+require './min_heap'
+require './max_heap'
+
+class MedianFinder
+
+=begin
+    initialize your data structure here.
+=end
+    def initialize()
+        @lo = MaxHeap.new
+        @hi = MinHeap.new
+    end
+
+
+=begin
+    :type num: Integer
+    :rtype: Void
+=end
+    def add_num(num)
+        @lo.add(num)
+        
+        @hi.add(@lo.poll)
+        
+        if @lo.size < @hi.size
+            @lo.add(@hi.poll)
+        end
+    end
+
+
+=begin
+    :rtype: Float
+=end
+    def find_median()
+       if @lo.size > @hi.size
+           @lo.peek
+       else
+           (@lo.peek + @hi.peek)/2.0
+       end
+    end
+
+
+end
