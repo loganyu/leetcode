@@ -20,10 +20,8 @@ def length_of_longest_substring_two_distinct(s)
     max = 0
     l = r = 0
     while r < s.length
-        if map.count < 3
-            map[s[r]] = r
-            r += 1
-        end
+        map[s[r]] = r
+        r += 1
         if map.count == 3
             first_char, first_idx = map.min_by{|char, i| i}
             map.delete(first_char)
@@ -35,4 +33,3 @@ def length_of_longest_substring_two_distinct(s)
     
     return max
 end
-
