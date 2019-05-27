@@ -35,18 +35,16 @@ def zigzag_level_order(root)
     reverse = false
     queue = [root]
     while !queue.empty?
-        next_queue = []
         level = []
-        queue.each do |node|
+        queue.length.times do
+            node = queue.shift
             reverse ? level.unshift(node.val) : level.push(node.val)
-            next_queue << node.left if node.left
-            next_queue << node.right if node.right
+            queue << node.left if node.left
+            queue << node.right if node.right
         end
-        queue = next_queue
         levels << level
         reverse = !reverse
     end
     
     levels
 end
-
