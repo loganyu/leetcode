@@ -27,10 +27,9 @@ class Solution:
                 start, end = s2, e2    
         return s[start:end+1]
     
-    def expandAroundCenter(self, s: str, start: int, end: int):
+    def expandAroundCenter(self, s: str, start: int, end: int) -> List[int]:
         while start >= 0 and end < len(s) and s[start] == s[end]:
             start -= 1
             end += 1
         
         return start + 1, end - 1
-
