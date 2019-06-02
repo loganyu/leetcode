@@ -23,7 +23,6 @@ Given word = "ABCB", return false.
 def exist(board, word)
     board.each_with_index do |row, i|
         row.each_with_index do |char, j|
-            visited = []
             if search(word, board, i, j)
                 return true
             end
