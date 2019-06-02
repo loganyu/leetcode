@@ -63,3 +63,31 @@ class MedianFinder:
 # obj.addNum(num)
 # param_2 = obj.findMedian()
 
+from heapq import *
+
+class MedianFinder:
+
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.nums = []
+
+    def addNum(self, num: int) -> None:
+        bisect.insort(self.nums, num)
+        
+
+    def findMedian(self) -> float:
+        nums = self.nums
+        l = len(nums)
+        if l % 2 == 0:
+            return (nums[l//2] + nums[l//2 - 1])/2.0
+        else:
+            return nums[l//2]
+        
+
+
+# Your MedianFinder object will be instantiated and called as such:
+# obj = MedianFinder()
+# obj.addNum(num)
+# param_2 = obj.findMedian()
