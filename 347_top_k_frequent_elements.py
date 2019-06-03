@@ -18,18 +18,12 @@ Your algorithm's time complexity must be better than O(n log n), where n is the 
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         count = collections.Counter(nums)
-                
         heap = []
-        heapq.heapify(heap)
-        
         for (num,freq) in count.items():
             if len(heap) == k:
                 heapq.heappushpop(heap, (freq, num))
             else:
                 heapq.heappush(heap, (freq, num))
         
-        result = []
-        for i in range(k):
-            result.append(heapq.heappop(heap)[1])
-        return result
+        return list(map(lambda info: info[1], heap))
 
