@@ -5,7 +5,7 @@ def is_power_of_three(n)
     return n > 0 && 3**19 % n == 0
 end
 
-# recursive
+# iterative
 def is_power_of_three(n)
     if n > 1
         while n % 3 == 0
