@@ -21,7 +21,6 @@ Output: 1->1->2->3->4->4->5->6
 class Solution:
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:
         heap = []
-        heapq.heapify(heap)
         prehead = point = ListNode(0)
         for l in lists:
             if l:
