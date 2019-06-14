@@ -33,7 +33,6 @@ Note:
 class Solution:
     def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
         heap = []
-        heapq.heapify(heap)
         for point in points:
             x = point[0]
             y = point[1]
