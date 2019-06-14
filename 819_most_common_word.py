@@ -43,7 +43,7 @@ class Solution:
             if word not in banned:
                 word_count[word] += 1
         
-        _, max_word = max(zip(word_count.values(), word_count.keys()))
-        
+        max_word = word_count.most_common(1)[0][0]
+
         return max_word
 
