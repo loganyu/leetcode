@@ -48,9 +48,6 @@ Explanation: Longest consecutive sequence path is 2-3, not 3-2-1, so return 2.
 # @return {Integer}
 def longest_consecutive(root)
     @max_length = 0
-    if root.nil?
-        return @max_length
-    end
     dfs(root, nil, 0)
     
     return @max_length
