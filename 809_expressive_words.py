@@ -26,7 +26,7 @@ Notes:
 0 <= len(words[i]) <= 100.
 S and all words in words consist only of lowercase letters
 '''
-
+# run length encoding solution
 class Solution:
     def expressiveWords(self, S: str, words: List[str]) -> int:
         s_letters, s_counts = self.RLE(S)
@@ -52,3 +52,27 @@ class Solution:
                 counts[-1] += 1
         return (letters, counts)
 
+# pointer solution
+class Solution:
+    def expressiveWords(self, S: str, words: List[str]) -> int:
+        count = 0
+        for W in words:
+            if self.is_expressive(S, W):
+                count += 1
+        
+        return count
+    
+    def is_expressive(self, S, W):
+        i, j, i2, j2, n, m = 0, 0, 0, 0, len(S), len(W)
+        while i < n and j < m:
+            if S[i] != W[j]:
+                return False
+            while i2 < n and S[i2] == S[i]:
+                i2 += 1
+            while j2 < m and W[j2] == W[j]:
+                j2 += 1
+            if i2 - i != j2 - j and i2 - i < max(j2 - j, 3):
+                return False
+            i, j = i2, j2
+        
+        return i == n and j == m
