@@ -30,7 +30,7 @@ def add_binary(a, b)
             sum += b[bi].to_i
         end
         carry_over = sum / 2
-        sol = (sum % 2).to_s + sol
+        sol.prepend((sum % 2).to_s)
         
         ai -= 1
         bi -= 1
