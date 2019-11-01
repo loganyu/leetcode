@@ -40,18 +40,18 @@ p and q are different and both values will exist in the binary tree.
 # @param {TreeNode} q
 # @return {TreeNode}
 def lowest_common_ancestor(root, p, q)
-    ans = []
-    recurse_tree(root, p, q, ans)
+    @ans = nil
+    recurse_tree(root, p, q)
     
-    ans[0]
+    @ans
 end
 
-def recurse_tree(node, p, q, ans)
+def recurse_tree(node, p, q)
     if node.nil?
         return 0
     end
-    left = recurse_tree(node.left, p, q, ans)
-    right = recurse_tree(node.right, p, q, ans)
+    left = recurse_tree(node.left, p, q)
+    right = recurse_tree(node.right, p, q)
     if node == p || node == q
         mid = 1
     else
@@ -59,7 +59,7 @@ def recurse_tree(node, p, q, ans)
     end
     
     if mid + left + right >= 2
-        ans << node
+       @ans = node
     end
     
     return [mid, left, right].max
