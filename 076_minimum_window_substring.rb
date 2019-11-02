@@ -29,24 +29,24 @@ def min_window(s, t)
     r = 0
     formed = 0
     window_counts = {}
-    # ans (window length, left, right)
+    # ans = [window length, left, right]
     ans = [-1, 0, 0]
     while (r < s.length)
         char = s[r]
         window_counts[char] ||= 0
         window_counts[char] += 1
         
-        if dict_t[char] && window_counts[char] == dict_t[char]
+        if dict_t[char] && dict_t[char] == window_counts[char]
             formed += 1
         end
         
         while l <= r && formed == required
-            char = s[l]
-            if ans[0] == -1 || (r - l + 1) < ans[0]
-                ans = [(r - l + 1), l, r]
+            if ans[0] == -1 or (r-l+1) < ans[0]
+                ans = [(r-l+1), l, r]
             end
+            char = s[l]
             window_counts[char] -= 1
-            if dict_t[char] && window_counts[char] < dict_t[char]
+            if dict_t[char] && dict_t[char] > window_counts[char]
                 formed -= 1
             end
             l += 1
@@ -57,7 +57,7 @@ def min_window(s, t)
     
     if ans[0] == -1
         return ""
+    else
+        return s[ans[1]..ans[2]]
     end
-    
-    return s[ans[1]..ans[2]]
 end
