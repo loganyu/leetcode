@@ -21,9 +21,8 @@ class Solution:
             sol[i] *= left
             
         right = 1
-        for j in range(n-2,-1,-1):
+        for j in reversed(range(n-1)):
             right *= nums[j+1]
             sol[j] *= right
-        
+            
         return sol
-
