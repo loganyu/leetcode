@@ -27,7 +27,7 @@ class Solution:
                 heapq.heappush(heap, (l.val, id(l), l))
         while len(heap) > 0:
             val, _, node = heapq.heappop(heap)
-            point.next = ListNode(val)
+            point.next = node
             point = point.next
             node = node.next
             if node:
