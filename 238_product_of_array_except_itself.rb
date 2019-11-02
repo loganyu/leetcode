@@ -14,13 +14,18 @@ Could you solve it with constant space complexity? (The output array does not co
 # @param {Integer[]} nums
 # @return {Integer[]}
 def product_except_self(nums)
-    l = nums.length
-    sol = Array.new(l, 1)
-    left = right = 1
-    1.upto(l-1).each do |i|
-        sol[i] *= left *= nums[i-1]
-        sol[~i] *= right *= nums[-i]
+    n = nums.length
+    sol = Array.new(n, 1)
+    left = 1
+    1.upto(n-1).each do |i|
+        left *= nums[i-1]
+        sol[i] *= left
+    end
+    right = 1
+    (n-2).downto(0).each do |j|
+        right *= nums[j+1]
+        sol[j] *= right
     end
     
-    sol
+    return sol
 end
