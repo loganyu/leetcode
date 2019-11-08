@@ -1,5 +1,5 @@
 =begin
-Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] (si < ei), find the minimum number of conference rooms required.
+iven an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] (si < ei), find the minimum number of conference rooms required.
 
 Example 1:
 
@@ -9,18 +9,10 @@ Example 2:
 
 Input: [[7,10],[2,4]]
 Output: 1
+NOTE: input types have been changed on April 15, 2019. Please reset to default code definition to get new method signature.
 =end
 
-# Definition for an interval.
-# class Interval
-#     attr_accessor :start, :end
-#     def initialize(s=0, e=0)
-#         @start = s
-#         @end = e
-#     end
-# end
-
-# @param {Interval[]} intervals
+# @param {Integer[][]} intervals
 # @return {Integer}
 def min_meeting_rooms(intervals)
     if intervals.empty?
@@ -28,8 +20,8 @@ def min_meeting_rooms(intervals)
     end
     
     used_rooms = 0
-    start_timings = intervals.map(&:start).sort
-    end_timings = intervals.map(&:end).sort
+    start_timings = intervals.map{|s,e| s}.sort
+    end_timings = intervals.map{|s,e| e}.sort
     l = intervals.length
     
     end_pointer = 0
