@@ -42,62 +42,60 @@ If the order is invalid, return an empty string.
 There may be multiple valid order of letters, return any one of them is fine.
 =end
 
+require 'set'
+
 # @param {String[]} words
 # @return {String}
 def alien_order(words)
-    map = {}
-    degree = {}
-    result = ""
-    
     if words.nil? || words.empty?
-        return result
+        return ''
     end
+    
+    map = {}
+    degrees = {}
+    result = ''
     
     words.each do |word|
         word.each_char do |char|
-            degree[char] = 0
+            degrees[char] = 0
         end
     end
     
     0.upto(words.length - 2).each do |i|
-        cur = words[i]
-        nex = words[i+1]
-        length = [cur.length, nex.length].min
+        word1 = words[i]
+        word2 = words[i+1]
+        length = [word1.length, word2.length].min
         0.upto(length - 1).each do |j|
-            c1 = cur[j]
-            c2 = nex[j]
+            c1 = word1[j]
+            c2 = word2[j]
             if c1 != c2
                 map[c1] ||= Set.new
-                map[c1].add(c2)
-                degree[c2] += 1
+                if !map[c1].include?(c2)
+                    map[c1].add(c2)
+                    degrees[c2] += 1
+                end
                 break
             end
         end
     end
     
-    queue = []
-    degree.each do |char, degrees|
-       if degrees == 0
-           queue.push(char)
-       end
-    end
-    
+    queue = degrees.select{|c, degrees| degrees == 0}.keys
     while !queue.empty?
         c = queue.shift
         result += c
         if map[c]
             map[c].each do |c2|
-                degree[c2] -= 1
-                if degree[c2] == 0
+                degrees[c2] -= 1
+                if degrees[c2] == 0
                     queue.push(c2)
                 end
             end
         end
     end
     
-    if result.length != degree.length
-        return ""
+    if result.length != degrees.length
+        return ''
+    else
+        return result
     end
-    
-    return result
 end
