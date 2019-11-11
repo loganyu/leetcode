@@ -46,32 +46,31 @@ from collections import defaultdict, Counter, deque
 
 class Solution:
     def alienOrder(self, words: List[str]) -> str:
-        wordGraph = defaultdict(list)
+        wordGraph = defaultdict(set)
         n = len(words)
         degrees = {}
-        
+
         for word in words:
             for char in word:
                 degrees[char] = 0
-        
-        for i in range(1,n):
-            word1 = words[i-1]
-            word2 = words[i]
+
+        for i in range(n-1):
+            word1 = words[i]
+            word2 = words[i+1]
             wordLength = min(len(word1), len(word2))
-            j = 0
-            while j < wordLength:
+            for j in range(wordLength):
                 if word1[j] != word2[j]:
-                    wordGraph[word1[j]].append(word2[j])
-                    degrees[word2[j]] += 1
+                    if word2[j] not in wordGraph[word1[j]]:
+                        wordGraph[word1[j]].add(word2[j])
+                        degrees[word2[j]] += 1
                     break
-                j += 1
-                
+
         sol = ""
         queue = deque()
         for letter, numDegrees in degrees.items():
             if numDegrees == 0:
                 queue.append(letter)
-                
+
         while len(queue) > 0:
             char = queue.popleft()
             sol += char
@@ -80,9 +79,9 @@ class Solution:
                     degrees[nextChar] -= 1
                     if degrees[nextChar] == 0:
                         queue.append(nextChar)
-         
+
         if len(sol) != len(degrees):
             return ""
-        
+
         return sol
         
