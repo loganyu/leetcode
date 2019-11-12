@@ -39,8 +39,9 @@ Output:
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
         memo = {}
-        return self.recurse(s, wordDict, 0, memo)
-    
+        word_dict = set(wordDict)
+        return self.recurse(s, word_dict, 0, memo)
+
     def recurse(self, s, word_dict, start, memo):
         if start in memo:
             return memo[start]
@@ -56,6 +57,5 @@ class Solution:
                     else:
                         res.append(f"{s[start:end]} {item}")
         memo[start] = res
-        
+
         return res
-        
