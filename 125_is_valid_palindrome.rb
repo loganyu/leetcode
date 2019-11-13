@@ -16,11 +16,20 @@ Output: false
 # @param {String} s
 # @return {Boolean}
 def is_palindrome(s)
-    s = s.gsub(/[^a-zA-Z\d]/, "").downcase
-    0.upto(s.length/2-1).each do |i|
-        if s[i] != s[~i]
+    l = 0
+    r = s.length - 1
+    while l < r
+        while !s[l].match(/[a-zA-Z0-9]/) && l < r
+            l += 1
+        end
+        while !s[r].match(/[a-zA-Z0-9]/) && l < r
+            r -= 1
+        end
+        if s[l].downcase != s[r].downcase
             return false
         end
+        l += 1
+        r -= 1
     end
     
     return true
