@@ -79,35 +79,33 @@ read4(buf) # read4 returns 4. Now buf = ['a','b','c','d'], fp points to 'e'
 read4(buf) # read4 returns 4. Now buf = ['e','f','g','h'], fp points to 'i'
 read4(buf) # read4 returns 3. Now buf = ['i','j','k',...], fp points to end of file
 """
-
 class Solution:
     def __init__(self):
         self.buf4 = ['']*4
-        self.buf4Size = 0
-        self.buf4Index = 0
-        self.isFinished = False
-        
+        self.buf4_size = 0
+        self.buf4_index = 0
+        self.is_finished = False
+
     def read(self, buf, n):
         """
         :type buf: Destination buffer (List[str])
         :type n: Number of characters to read (int)
         :rtype: The number of actual characters read (int)
         """
-        bufIndex = 0
-        while bufIndex < n and self.buf4Index < self.buf4Size:
-            buf[bufIndex] = self.buf4[self.buf4Index]
-            bufIndex += 1
-            self.buf4Index += 1
-        
-        while bufIndex < n and not self.isFinished:
-            self.buf4Size = read4(self.buf4)
-            self.buf4Index = 0
-            if self.buf4Size < 4:
-                self.isFinished = True
-            while bufIndex < n and self.buf4Index < self.buf4Size:
-                buf[bufIndex] = self.buf4[self.buf4Index]
-                bufIndex += 1
-                self.buf4Index += 1
-        return bufIndex
-    
-    
+        buf_index = 0
+        while buf_index < n and self.buf4_index < self.buf4_size:
+            buf[buf_index] = self.buf4[self.buf4_index]
+            buf_index += 1
+            self.buf4_index += 1
+
+        while buf_index < n and not self.is_finished:
+            self.buf4_size = read4(self.buf4)
+            self.buf4_index = 0
+            if self.buf4_size < 4:
+                self.is_finished = True
+            while buf_index < n and self.buf4_index < self.buf4_size:
+                buf[buf_index] = self.buf4[self.buf4_index]
+                buf_index += 1
+                self.buf4_index += 1
+
+        return buf_index
