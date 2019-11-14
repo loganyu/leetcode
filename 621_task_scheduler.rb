@@ -27,22 +27,22 @@ def least_interval(tasks, n)
     counts = get_counts_of_tasks(tasks)
     
     time = 0
-    while (counts[0] > 0)
+    while counts[0] > 0
         i = 0
-        while (i <= n)
+        while i <= n
             if counts[0] == 0
                 break
             end
-            if (i < counts.length && counts[i] > 0)        
+            if i < counts.length && counts[i] > 0
                 counts[i] -= 1
             end
             time += 1
             i += 1
         end
-        counts.sort!{|x,y| y <=> x}
+        counts.sort_by!{|x| -x}
     end
     
-    time
+    return time
 end
 
 def get_counts_of_tasks(tasks)
@@ -51,6 +51,6 @@ def get_counts_of_tasks(tasks)
         counts[task] ||= 0
         counts[task] += 1
     end
-    
-    counts.values.sort {|x,y| y <=> x}
+   
+    return counts.values.sort_by{|x| -x}
 end
