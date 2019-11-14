@@ -26,51 +26,22 @@ Explanation:
 # @param {TreeNode} root
 # @return {Integer[]}
 def right_side_view(root)
-    rightmost_value_at_depth = {}
-    max_depth = -1
-    
-    stack = [[root, 0]]
-    
-    while !stack.empty?
-        node, depth = stack.pop
-        if !node.nil?
-            max_depth = [max_depth, depth].max
-
-            rightmost_value_at_depth[depth] ||= node.val
-
-            stack.push([node.left, depth + 1])
-            stack.push([node.right, depth + 1])
+    sol = []
+    if root.nil?
+        return sol
+    end
+    queue = [root]
+    while !queue.empty?
+        num_items_at_level = queue.length
+        num_items_at_level.times do |i|
+            cur = queue.shift
+            queue.push(cur.left) if cur.left
+            queue.push(cur.right) if cur.right
+            if i == num_items_at_level - 1
+                sol.push(cur.val)
+            end
         end
     end
     
-    (0..max_depth).map{|depth| rightmost_value_at_depth[depth]}
-end
-# Definition for a binary tree node.
-# class TreeNode
-#     attr_accessor :val, :left, :right
-#     def initialize(val)
-#         @val = val
-#         @left, @right = nil, nil
-#     end
-# end
-
-# @param {TreeNode} root
-# @return {Integer[]}
-def right_side_view(root)
-    rightmost_value_at_depth = {}
-    max_depth = -1
-    
-    stack = [[root, 0]]
-    
-    while !stack.empty?
-        node, depth = stack.pop
-        if !node.nil?
-            rightmost_value_at_depth[depth] ||= node.val
-
-            stack.push([node.left, depth + 1])
-            stack.push([node.right, depth + 1])
-        end
-    end
-    
-    rightmost_value_at_depth.map{|depth, value| value}
+    return sol
 end
