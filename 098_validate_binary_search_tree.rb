@@ -37,36 +37,25 @@ Explanation: The input is: [5,1,4,null,null,3,6]. The root node's value
 # @param {TreeNode} root
 # @return {Boolean}
 def is_valid_bst(root)
-    if root.nil?
+    helper(root)
+end
+
+def helper(node, lower_limit = -Float::INFINITY, upper_limit = Float::INFINITY)
+    if node.nil?
         return true
     end
     
-    helper(root, nil, nil)
+    if node.val <= lower_limit || node.val >= upper_limit
+        return false
+    end
+    
+    if !helper(node.right, node.val, upper_limit)
+        return false
+    end
+    if !helper(node.left, lower_limit, node.val)
+        return false
+    end
+    
+    return true
 end
-
-def helper(node, lower_limit, upper_limit)
-    if lower_limit && node.val <= lower_limit
-        return false
-    end
-    if upper_limit && node.val >= upper_limit
-        return false
-    end
-    
-    if node.left
-        left = helper(node.left, lower_limit, node.val)
-    else
-        left = true
-    end
-    
-    if left == false
-        return false
-    end
-    
-    if node.right
-        right = helper(node.right, node.val, upper_limit)
-    else
-        right = true
-    end
-    
-    return right
-end
+ 
