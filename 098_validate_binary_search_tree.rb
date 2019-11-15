@@ -45,26 +45,28 @@ def is_valid_bst(root)
 end
 
 def helper(node, lower_limit, upper_limit)
-    if !lower_limit.nil? && node.val <= lower_limit
+    if lower_limit && node.val <= lower_limit
         return false
     end
-    if !upper_limit.nil? && upper_limit <= node.val
+    if upper_limit && node.val >= upper_limit
         return false
     end
+    
     if node.left
         left = helper(node.left, lower_limit, node.val)
     else
         left = true
     end
-    if left
-        if node.right
-            right = helper(node.right, node.val, upper_limit)
-        else
-            right = true
-        end
-        
-        return right
-    else
+    
+    if left == false
         return false
     end
+    
+    if node.right
+        right = helper(node.right, node.val, upper_limit)
+    else
+        right = true
+    end
+    
+    return right
 end
