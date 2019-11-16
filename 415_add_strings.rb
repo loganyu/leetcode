@@ -28,10 +28,9 @@ def add_strings(num1, num2)
             sum += num2[j].ord - '0'.ord
             j -= 1
         end
-        carry = sum/10
-        sol = String(sum%10) + sol
+        carry = sum / 10
+        sol.prepend(String(sum % 10))
     end
     
-    sol
+    return sol
 end
-
