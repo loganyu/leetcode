@@ -21,10 +21,13 @@ def length_of_longest_substring_k_distinct(s, k)
     max = 0
     l = r = 0
     while r < s.length
+        if map[s[r]]
+            map.delete(s[r])
+        end
         map[s[r]] = r
         r += 1
-        if map.count == k+1
-            first_char, first_idx = map.min_by{|char, i| i}
+        if map.count == k + 1
+            first_char, first_idx = map.first
             map.delete(first_char)
             l = first_idx + 1
         end
@@ -34,4 +37,3 @@ def length_of_longest_substring_k_distinct(s, k)
     
     return max
 end
-
