@@ -27,36 +27,40 @@ Output: []
 # @param {Integer} target
 # @return {String[]}
 def add_operators(num, target)
-    answers = []
-    recurse(0, 0, 0, 0, "", num, target, answers)
+    @answers = []
+    @num = num
+    @target = target
+    @string = ''
+    recurse(0, 0, 0, 0)
     
-    return answers
+    return @answers
 end
 
-def recurse(index, prev_operand, current_operand, value, string, num, target, answers)
-    if index == num.length
-        if value == target && current_operand == 0
-            answers << string[1..-1]
+def recurse(i, prev_op, curr_op, val)
+    if i == @num.length
+        if val == @target && curr_op == 0
+            @answers << @string[1..-1]
         end
         return
     end
-    
-    current_operand = current_operand*10 + num[index].to_i
-    str_op = current_operand.to_s
-    
-    if current_operand > 0
-        recurse(index + 1, prev_operand, current_operand, value, string, num, target, answers)
+    curr_op = curr_op*10 + @num[i].to_i
+    str_op = curr_op.to_s
+    # continue
+    if curr_op > 0
+        recurse(i+1, prev_op, curr_op, val)
     end
-    string.concat('+').concat(str_op)
-    recurse(index + 1, current_operand, 0, value + current_operand, string, num, target, answers)
-    string.chomp!(str_op).chomp!('+')
-    if !string.empty?
-        string.concat('-').concat(str_op)
-        recurse(index + 1, -current_operand, 0, value - current_operand, string, num, target, answers)
-        string.chomp!(str_op).chomp!('-')
-        
-        string.concat('*').concat(str_op)
-        recurse(index + 1, current_operand * prev_operand, 0, value - prev_operand + (current_operand * prev_operand), string, num, target, answers)
-        string.chomp!(str_op).chomp!('*')
+    # add op
+    @string.concat('+').concat(str_op)
+    recurse(i+1, curr_op, 0, val + curr_op)
+    @string.chomp!(str_op).chomp!('+')
+    if !@string.empty?
+        # substract op
+        @string.concat('-').concat(str_op)
+        recurse(i+1, -curr_op, 0, val - curr_op)
+        @string.chomp!(str_op).chomp!('-')
+        # multiply op
+        @string.concat('*').concat(str_op)
+        recurse(i+1, curr_op * prev_op, 0, val - prev_op + (prev_op * curr_op))
+        @string.chomp!(str_op).chomp!('*')
     end
 end
