@@ -32,5 +32,5 @@ def is_pali_range(s, i, j)
       end
    end
     
-    return true
+   return true
 end
