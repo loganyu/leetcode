@@ -24,6 +24,10 @@ What if elements of nums2 are stored on disk, and the memory is limited such tha
 # @param {Integer[]} nums2
 # @return {Integer[]}
 def intersect(nums1, nums2)
+    if nums1.count > nums2.count
+        return intersect(nums2, nums1)
+    end
+    
     dict = {}
     sol = []
     nums1.each do |num|
@@ -37,5 +41,5 @@ def intersect(nums1, nums2)
         end
     end
     
-    sol
+    return sol
 end
