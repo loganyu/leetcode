@@ -25,9 +25,9 @@ Note: The length of path between two nodes is represented by the number of edges
 # @param {TreeNode} root
 # @return {Integer}
 def diameter_of_binary_tree(root)
-    @max_depth = 1
+    @max_diameter = 1
     depth(root)
-    return @max_depth - 1
+    return @max_diameter - 1
 end
 
 def depth(node)
@@ -36,7 +36,7 @@ def depth(node)
     end
     l = depth(node.left)
     r = depth(node.right)
-    @max_depth = [@max_depth, l + r + 1].max
+    @max_diameter = [@max_diameter, l + r + 1].max
     
     return [l, r].max + 1
 end
