@@ -28,10 +28,11 @@ class NumMatrix
     :type matrix: Integer[][]
 =end
     def initialize(matrix)
-        if matrix.empty? || matrix[0].empty?
-            return 0
-        end
         height = matrix.length
+        if height == 0
+            @sums = []
+            return
+        end
         width = matrix[0].length
         @sums = Array.new(height + 1){Array.new(width + 1){0}}
         (0...height).each do |row|
@@ -53,8 +54,6 @@ class NumMatrix
     def sum_region(row1, col1, row2, col2)
         @sums[row2 + 1][col2 + 1] - @sums[row2 + 1][col1] - @sums[row1][col2 + 1] + @sums[row1][col1]
     end
-
-
 end
 
 # Your NumMatrix object will be instantiated and called as such:
