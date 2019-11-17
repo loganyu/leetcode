@@ -33,9 +33,9 @@ Then 4 is the first bad version.
 def first_bad_version(n)
     l = 1
     r = n
-    while l<=r
-        mid = l + (r-l)/2
-        if is_bad_version(mid) && !is_bad_version(mid-1)
+    loop do
+        mid = l + (r - l)/2
+        if is_bad_version(mid) && !is_bad_version(mid - 1)
             return mid
         elsif is_bad_version(mid)
             r = mid - 1
