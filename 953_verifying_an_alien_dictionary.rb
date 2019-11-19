@@ -34,14 +34,18 @@ All characters in words[i] and order are english lowercase letters.
 # @param {String} order
 # @return {Boolean}
 def is_alien_sorted(words, order)
-    order_index = Set.new(order.split(''))
+    order_index = {}
+    order.each_char.with_index do |char, i|
+        order_index[char] = i
+    end
+    
     0.upto(words.length - 2).each do |i|
         word1 = words[i]
         word2 = words[i+1]
         in_order = false
         0.upto([word1.length - 1, word2.length - 1].min) do |j|
            if word1[j] != word2[j]
-               if order_index.find_index(word1[j]) > order_index.find_index(word2[j])
+               if order_index[word1[j]] > order_index[word2[j]]
                    return false
                end
                
