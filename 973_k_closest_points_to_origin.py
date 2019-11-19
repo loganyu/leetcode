@@ -30,7 +30,8 @@ Note:
 -10000 < points[i][1] < 10000
 '''
 
-from heapq import *
+import math
+from heapq import heappushpop, heappush
 
 class Solution:
     def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
