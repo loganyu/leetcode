@@ -14,35 +14,34 @@ Note:
 Although the above answer is in lexicographical order, your answer could be in any order you want.
 =end
 
+PHONE = {
+    '2' => %w(a b c),
+    '3' => %w(d e f),
+    '4' => %w(g h i),
+    '5' => %w(j k l),
+    '6' => %w(m n o),
+    '7' => %w(p q r s),
+    '8' => %w(t u v),
+    '9' => %w(w x y z),
+}
 # @param {String} digits
 # @return {String[]}
-def letter_combinations(digits)    
-    output = []
+def letter_combinations(digits)
+    @output = []
     if !digits.empty?
-      backtrack("", digits, output)
+        backtrack("", digits)
     end
-
-    return output
-end
     
-def backtrack(combination, next_digits, output)
-    phone = {
-        '2' => ['a','b','c'],
-        '3' => ['d','e','f'], 
-        '4' => ['g','h','i'], 
-        '5' => ['j','k','l'], 
-        '6' => ['m','n','o'], 
-        '7' => ['p','q','r','s'],
-        '8' => ['t','u','v'],
-        '9' => ['w','x','y','z'],
-    }
+    return @output
+end
+
+def backtrack(combo, next_digits)
     if next_digits.length == 0
-        output.push(combination)
+        @output.push(combo)
     else
-        phone[next_digits[0]].each do |letter|
-            backtrack(combination + letter, next_digits[1..-1], output)
+        PHONE[next_digits[0]].each do |letter|
+            backtrack(combo + letter, next_digits[1..-1])
         end
     end
 end
 
-puts letter_combinations("23").inspect
