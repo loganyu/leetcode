@@ -24,32 +24,28 @@ Do not use the eval built-in library function.
 # @param {String} s
 # @return {Integer}
 def calculate(s)
-    stack, num, op = [], 0, "+"
+    sum = temp_sum = num = 0
+    op = '+'
     s += "+0"
     s.each_char do |char|
         if /\d/.match(char)
             num = num * 10 + char.to_i
         elsif ['+', '-', '*', '/'].include?(char)
-            if op == '-'
-                stack.push(-num)
-            elsif op == '+'
-                stack.push(num)
+            if op == '+'
+                sum += temp_sum
+                temp_sum = num
+            elsif op == '-'
+                sum += temp_sum
+                temp_sum = -num
             elsif op == '*'
-                stack.push(stack.pop() * num)
+                temp_sum *= num
             else
-                num2 = stack.pop()
-                if num2/num < 0 && num2%num != 0
-                    stack.push(num2/num+1)
-                else
-                    stack.push(num2/num)
-                end
+                temp_sum = (temp_sum / num.to_f).truncate
             end
             op, num = char, 0
         end
     end
+    sum += temp_sum
     
-    stack.sum
+    return sum
 end
-
-
-puts calculate("14-3/2")
