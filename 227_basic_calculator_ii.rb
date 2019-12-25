@@ -49,3 +49,31 @@ def calculate(s)
     
     return sum
 end
+
+# with stack
+# @param {String} s
+# @return {Integer}
+def calculate(s)
+    stack = []
+    num = 0
+    op = '+'
+    s += "+0"
+    s.each_char do |char|
+        if /\d/.match(char)
+            num = num * 10 + char.to_i
+        elsif ['+', '-', '*', '/'].include?(char)
+            if op == '+'
+                stack << num
+            elsif op == '-'
+                stack << -num
+            elsif op == '*'
+                stack[-1] = stack[-1] * num
+            else
+                stack[-1] = (stack[-1] / num.to_f).truncate
+            end
+            op, num = char, 0
+        end
+    end
+    
+    return stack.sum
+end
