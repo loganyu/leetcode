@@ -32,6 +32,7 @@ class Solution(object):
     def permute(self, total, middle, freq, path, ans):
         if total == 0:
             ans.append(''.join(path + middle + list(reversed(path))))
+            return
         for char in freq:
             if freq[char] <= 0:
                 continue
