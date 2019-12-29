@@ -15,28 +15,28 @@ Although the above answer is in lexicographical order, your answer could be in a
 '''
 
 class Solution:
-    lettersByNum = {
-            '2': 'abc',
-            '3': 'def',
-            '4': 'ghi',
-            '5': 'jkl',
-            '6': 'mno',
-            '7': 'pqrs',
-            '8': 'tuv',
-            '9': 'wxyz'
+    letters_by_digit = {
+        '2': 'abc',
+        '3': 'def',
+        '4': 'ghi',
+        '5': 'jkl',
+        '6': 'mno',
+        '7': 'pqrs',
+        '8': 'tuv',
+        '9': 'wxyz',
     }
-    
+
     def letterCombinations(self, digits: str) -> List[str]:
         combos = []
-        if len(digits) > 0: 
+        if digits:
             self.backtrack('', digits, combos)
-        
+
         return combos
-        
-    def backtrack(self, combo, nextDigits, combos):
-        if len(nextDigits) == 0:
+
+    def backtrack(self, combo, digits, combos):
+        i = len(combo)
+        if i == len(digits):
             combos.append(combo)
         else:
-            for letter in self.lettersByNum[nextDigits[0]]:
-                self.backtrack(combo + letter, nextDigits[1:], combos)
-        
+            for letter in self.letters_by_digit[digits[i]]:
+                self.backtrack(combo + letter, digits, combos)
