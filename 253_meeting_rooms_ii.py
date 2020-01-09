@@ -14,18 +14,19 @@ NOTE: input types have been changed on April 15, 2019. Please reset to default c
 
 class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
-        usedRooms = 0
-        startTimes = sorted(map(lambda interval: interval[0], intervals))
-        endTimes = sorted(map(lambda interval: interval[1], intervals))
+        start_times = sorted(i[0] for i in intervals)
+        end_times = sorted(i[1] for i in intervals)
         n = len(intervals)
+        s = 0
+        e = 0
+        rooms = 0
         
-        s = e = 0
-        while (s < n):
-            if startTimes[s] >= endTimes[e]:
+        while s < n:
+            if start_times[s] >= end_times[e]:
                 e += 1
             else:
-                usedRooms += 1
+                rooms += 1
             s += 1
         
-        return usedRooms
-        
+        return rooms
+                 
