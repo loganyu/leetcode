@@ -58,3 +58,45 @@ def permute(even, s, odd_char)
     end
 end
 
+# build path solution
+# @param {String} s
+# @return {String[]}
+def generate_palindromes(s)
+    freq = Hash.new(0)
+    s.each_char {|char| freq[char] += 1}
+    middle = freq.keys.select{|char| freq[char] % 2 == 1}
+    if middle.length > 1
+        return []
+    end
+    
+    if middle.length == 1
+        freq[middle[0]] -= 1
+        total = s.length - 1
+    else
+        total = s.length
+    end
+    
+    ans = []
+    path = []
+    
+    permutate(total, middle, freq, path, ans)
+    
+    return ans
+end
+
+def permutate(total, middle, freq, path, ans)
+    if total == 0
+        ans << (path + middle + path.reverse).join
+        return
+    end
+    freq.keys.each do |char|
+        if freq[char] <= 0
+            next
+        end
+        freq[char] -= 2
+        path.push(char)
+        permutate(total - 2, middle, freq, path, ans)
+        freq[char] += 2
+        path.pop()
+    end
+end

@@ -54,3 +54,27 @@ class Solution(object):
                 
         return sum(stack)
 
+# without stack
+class Solution:
+    def calculate(self, s: str) -> int:
+        total = temp_sum = num = 0
+        op = '+'
+        s += '+0'
+        for c in s:
+            if c.isdigit():
+                num = num*10 + int(c)
+            elif c in "+-*/":
+                if op == '+':
+                    total += temp_sum
+                    temp_sum = num
+                elif op == '-':
+                    total += temp_sum
+                    temp_sum = -num
+                elif op == '*':
+                    temp_sum *= num
+                else:
+                    temp_sum = math.trunc(temp_sum/num)
+                op, num = c, 0
+        total += temp_sum
+
+        return total
