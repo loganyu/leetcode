@@ -75,8 +75,8 @@ def full_justify(words, max_width)
         cur << w
         num_of_letters += w.length
     end
-    res << cur.join(' ').ljust(max_width)
-    
+    res << cur.join(' ') + ' ' * (max_width - num_of_letters - (cur.length - 1))
+
     return res
 end
 
