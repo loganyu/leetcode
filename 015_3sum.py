@@ -23,6 +23,8 @@ class Solution:
         for i in range(len(nums) - 2):
             l = i + 1
             r = len(nums) - 1
+            if nums[i] > 0:
+                break
             while l < r:
                 total = nums[i] + nums[l] + nums[r]
                 if total == 0:
