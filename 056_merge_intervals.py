@@ -17,12 +17,10 @@ NOTE: input types have been changed on April 15, 2019. Please reset to default c
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         merged = []
-        for interval in sorted(intervals, key = lambda interval: interval[0]):
-            if len(merged) == 0 or merged[-1][1] < interval[0]:
+        for interval in sorted(intervals):
+            if not merged or merged[-1][1] < interval[0]:
                 merged.append(interval)
-            else:
-                if merged[-1][1] < interval[1]:
-                    merged[-1][1] = interval[1]
+            elif merged[-1][1] < interval[1]:
+                merged[-1][1] = interval[1]
         
         return merged
-
