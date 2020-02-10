@@ -13,6 +13,7 @@ Input:
 Output: 4
 =end
 
+# O(nm) space
 # @param {Character[][]} matrix
 # @return {Integer}
 def maximal_square(matrix)
@@ -40,3 +41,25 @@ def maximal_square(matrix)
     maxsqlen**2
 end
 
+# O(n) space
+class Solution:
+    def maximalSquare(self, matrix: List[List[str]]) -> int:
+        if len(matrix) == 0:
+            return 0
+        
+        rows = len(matrix)
+        cols = len(matrix[0])
+        max_len = 0
+        prev = 0
+        dp = [0 for _ in range(cols+1)]
+        for r in range(1, rows+1):
+            for c in range(1, cols+1):
+                temp = dp[c]
+                if matrix[r-1][c-1] == '1':
+                    dp[c] = min(dp[c-1], dp[c], prev) + 1
+                    max_len = max(max_len, dp[c])
+                else:
+                    dp[c] = 0
+                prev = temp
+        
+        return max_len**2
