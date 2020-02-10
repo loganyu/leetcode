@@ -15,6 +15,9 @@ Output: 4
 
 class Solution:
     def maximalSquare(self, matrix: List[List[str]]) -> int:
+        if len(matrix) == 0:
+            return 0
+
         rows = len(matrix)
         cols = len(matrix[0])
         max_len = 0
@@ -24,5 +27,5 @@ class Solution:
                 if matrix[r-1][c-1] == '1':
                     dp[r][c] = min(dp[r][c-1], dp[r-1][c], dp[r-1][c-1]) + 1
                     max_len = max(max_len, dp[r][c])
-        
-        return max_len**2 
+
+        return max_len**2
