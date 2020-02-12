@@ -21,13 +21,13 @@ class Solution:
         dp = [None]*n
         dp[0] = 1
         max_ans = 1
-        for i in range(1,n):
+        for e in range(n):
             max_val = 0
-            for j in range(i):
-                if nums[i] > nums[j]:
-                    max_val = max(max_val, dp[j])
-            dp[i] = max_val + 1
-            max_ans = max(max_ans, dp[i])
+            for s in range(e):
+                if nums[s] < nums[e]:
+                    max_val = max(max_val, dp[s])
+            dp[e] = max_val + 1
+            max_ans = max(max_ans, dp[e])
         
         return max_ans
-
+            
