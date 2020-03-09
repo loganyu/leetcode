@@ -36,7 +36,7 @@ class Solution:
                 if not visited[neighbor]:
                     dfs(rank + 1, neighbor, curr)
                 low[curr] = min(low[curr], low[neighbor])
-                if low[neighbor] >= rank + 1:
+                if low[neighbor] > rank:
                     self.sol.append([curr, neighbor])
         
         visited = [False]*n
