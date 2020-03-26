@@ -22,23 +22,29 @@ class Solution:
         window_counts = Counter()
         # ans [window length, left, right]
         ans = -1, 0, 0
+        
         while r < len(s):
             char = s[r]
-            window_counts[char] += 1
-            if char in dict_t and window_counts[char] == dict_t[char]:
-                formed += 1
+            if char in dict_t:
+                window_counts[char] += 1
+                if window_counts[char] == dict_t[char]:
+                    formed += 1
             while (l <= r and formed == required):
                 if ans[0] == -1 or (r-l+1) < ans[0]:
                     ans = ((r-l+1), l, r)
                 char = s[l]
-                window_counts[char] -= 1
-                if char in dict_t and window_counts[char] < dict_t[char]:
-                    formed -= 1
+                if char in dict_t:
+                    window_counts[char] -= 1
+                    if window_counts[char] < dict_t[char]:
+                        formed -= 1
                 l += 1
-            r += 1
             
+            r += 1
+        
         if ans[0] == -1:
             return ""
         
         return s[ans[1]:ans[2]+1]
                 
+        
+        
