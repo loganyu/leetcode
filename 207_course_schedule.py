@@ -24,7 +24,7 @@ The input prerequisites is a graph represented by a list of edges, not adjacency
 You may assume that there are no duplicate edges in the input prerequisites.
 '''
 
-from collections import defaultdict, deque
+from collections import defaultdict
 
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
@@ -37,21 +37,21 @@ class Solution:
             courses_by_prereq[prereq].append(course)
             degrees[course] += 1
             
-        
-        queue = deque()
-        for course, num_degrees in degrees.items():
-            if num_degrees == 0:
+        queue = []
+        for course, degree in degrees.items():
+            if degree == 0:
                 queue.append(course)
         
         completed = 0
-        while len(queue) > 0:
-            course = queue.popleft()
+        while queue:
             completed += 1
-            for next_course in courses_by_prereq[course]:
-                degrees[next_course] -= 1
-                if degrees[next_course] == 0:
-                    queue.append(next_course)
+            prereq = queue.pop()
+            for course in courses_by_prereq[prereq]:
+                degrees[course] -= 1
+                if degrees[course] == 0:
+                    queue.append(course)
         
-        return completed == numCourses
-            
+        return numCourses == completed
+        
+        
         
