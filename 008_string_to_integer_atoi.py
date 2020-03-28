@@ -52,17 +52,19 @@ class Solution:
         else:
             sign = 1
         if sl[0] in ["-","+"]:
-            del sl[0]
-        sol = 0
-        i = 0
-
+            i = 1
+        else:
+            i = 0
+            
+        total = 0
+        int_max = 2**31 - 1
+        int_min = -2**31 
         while i < len(sl) and sl[i].isdigit():
-            sol = sol*10 + int(sl[i])
+            digit = int(sl[i])
+            if total > int_max // 10 or (int_max // 10 == total and int_max % 10 < digit):
+                return int_max if sign == 1 else int_min
+            total = total*10 + digit
             i += 1
-        sol = sol * sign
-        if sol < -2**31:
-            return -2**31
-        if  sol > 2**31 - 1:
-            return 2**31 - 1
-        return sol
+        total = total * sign
 
+        return total
