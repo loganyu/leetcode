@@ -1,11 +1,10 @@
-# LeetCodeSolutions
-
+<h1>Leetcode Solutions</h1>
 <table>
   <tr>
-    <th>#</th>
-    <th>Title</th>
-    <th>Solutions</th>
-    <th>Difficulty</th>
+    <th width="30%">#</th>
+    <th width="50%">Title</th>
+    <th width="10%">Solutions</th>
+    <th width="10%">Difficulty</th>
   </tr>
   <tr>
     <td>1</td>
