@@ -25,5 +25,4 @@ class Solution:
             key = tuple(sorted(word))
             wordsByGroup[key].append(word)
             
-        return list(wordsByGroup.values())
-
+        return wordsByGroup.values()
