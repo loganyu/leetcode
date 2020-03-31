@@ -24,7 +24,6 @@ def multiply(num1, num2)
     n = num1.length
     m = num2.length
     solution = Array.new(n+m){0}
-    pos = solution.length - 1
     
     (n - 1).downto(0).each do |i|
         (m - 1).downto(0).each do |j|
