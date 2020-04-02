@@ -26,3 +26,17 @@ class Solution:
             wordsByGroup[key].append(word)
             
         return wordsByGroup.values()
+
+# counting sort
+from collections import defaultdict
+
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        word_by_group = defaultdict(list)
+        for word in strs:
+            count = [0] * 26
+            for char in word:
+                count[ord(char) - ord('a')] += 1
+            word_by_group[tuple(count)].append(word)
+        
+        return word_by_group.values()   
