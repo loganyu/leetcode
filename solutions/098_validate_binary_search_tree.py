@@ -41,24 +41,19 @@ class Solution:
         if not root:
             return True
         
-        return self.helper(root, None, None)
+        return self.valid(root, None, None)
     
-    def helper(self, node, lower_limit, upper_limit):
+    def valid(self, node, lower_limit, upper_limit):
         if lower_limit != None and node.val <= lower_limit:
             return False
         if upper_limit != None and node.val >= upper_limit:
             return False
         if node.left:
-            left = self.helper(node.left, lower_limit, node.val)
-        else:
-            left = True
-        if left:
-            if node.right:
-                right = self.helper(node.right, node.val, upper_limit)
-            else:
-                right = True
-                
-            return right
-        else:
-            return False
-
+            left_valid = self.valid(node.left, lower_limit, node.val)
+            if not left_valid:
+                return False
+        if node.right:
+            right_valid = self.valid(node.right, node.val, upper_limit)
+            if not right_valid:
+                return False
+        return True
