@@ -23,6 +23,7 @@ Output: 3
 
 # @param {Character[][]} grid
 # @return {Integer}
+# bfs
 def num_islands(grid)
     if (grid.nil? || grid.empty?)
         return 0
@@ -64,4 +65,37 @@ def num_islands(grid)
     end
     
     return num_islands
+end
+
+# dfs
+def num_islands(grid)
+    if (grid.nil? || grid.empty?)
+        return 0
+    end
+    
+    nr = grid.length
+    nc = grid[0].length
+    num_islands = 0
+    grid.each_with_index do |row, r|
+        row.each_with_index do |val, c|
+            if val == '1'
+                num_islands += 1
+                dfs(grid, r, c, nr, nc)
+            end
+        end
+    end
+    
+    return num_islands
+end
+
+def dfs(grid, r, c, nr, nc)
+    if (r < 0 || c < 0 || r >= nr || c >= nc || grid[r][c] == '0')
+        return
+    end
+    
+    grid[r][c] = '0'
+    dfs(grid, r - 1, c, nr, nc)
+    dfs(grid, r + 1, c, nr, nc)
+    dfs(grid, r, c - 1, nr, nc)
+    dfs(grid, r, c + 1, nr, nc)
 end
