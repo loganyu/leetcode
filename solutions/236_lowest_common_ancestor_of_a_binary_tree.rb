@@ -47,7 +47,7 @@ def lowest_common_ancestor(root, p, q)
 end
 
 def recurse_tree(node, p, q)
-    if node.nil?
+    if node.nil? || !@ans.nil?
         return 0
     end
     left = recurse_tree(node.left, p, q)
@@ -58,7 +58,7 @@ def recurse_tree(node, p, q)
         mid = 0
     end
     
-    if mid + left + right >= 2
+    if mid + left + right == 2
        @ans = node
     end
     

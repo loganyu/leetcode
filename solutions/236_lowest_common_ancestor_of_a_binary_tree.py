@@ -39,7 +39,7 @@ class Solution:
         
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         def recurse(current_node):
-            if not current_node:
+            if not current_node or self.ans:
                 return 0
             left = recurse(current_node.left)
             right = recurse(current_node.right)
@@ -49,7 +49,7 @@ class Solution:
             else:
                 mid = 0
             
-            if (left + right + mid) >= 2:
+            if (left + right + mid) == 2:
                 self.ans = current_node
             
             return max(left, right, mid)
