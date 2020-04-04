@@ -57,6 +57,10 @@ class Solution:
         for i in range(n-1):
             word1 = words[i]
             word2 = words[i+1]
+            if word1 == word2:
+                continue
+            if word1.startswith(word2):
+                return ""
             wordLength = min(len(word1), len(word2))
             for j in range(wordLength):
                 if word1[j] != word2[j]:
