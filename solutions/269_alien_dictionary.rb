@@ -64,6 +64,12 @@ def alien_order(words)
     0.upto(words.length - 2).each do |i|
         word1 = words[i]
         word2 = words[i+1]
+        if word1 == word2
+            next
+        end
+        if word1.start_with?(word2)
+            return ""
+        end
         length = [word1.length, word2.length].min
         0.upto(length - 1).each do |j|
             c1 = word1[j]
