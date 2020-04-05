@@ -67,7 +67,7 @@ def shortest_distance(grid)
     shortest_distance = -1
     (0...height).each do |row|
         (0...width).each do |col|
-            if grid[row][col] == walkable && reachable_buildings[row][col] == buildings
+            if reachable_buildings[row][col] == buildings
                 if shortest_distance == -1 || shortest_distance > distance[row][col]
                     shortest_distance = distance[row][col]
                 end
