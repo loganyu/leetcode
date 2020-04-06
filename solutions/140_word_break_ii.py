@@ -36,6 +36,7 @@ Output:
 []
 '''
 
+# recursion with memoization
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
         memo = {}
@@ -59,3 +60,35 @@ class Solution:
         memo[start] = res
 
         return res
+
+# dp solution
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
+        wordDict = set(wordDict)
+        
+        valid = [False] * (len(s) + 1)
+        valid[0] = True
+        for end in range(1, len(s) + 1):
+            for start in range(end):
+                if valid[start] and s[start:end] in wordDict:
+                    valid[end] = True
+                    break
+                    
+        if not valid[-1]:
+            return []
+        
+        dp = [None] * (len(s) +1)
+        dp[0] = [""]
+        for end in range(1, len(s) + 1):
+            sentences = []
+            for start in range(end):
+                if len(dp[start]) > 0 and s[start:end] in wordDict:
+                    for sentence in dp[start]:
+                        if sentence == "":
+                            sentences.append(s[start:end])
+                        else:
+                            sentences.append(f"{sentence} {s[start:end]}")
+            dp[end] = sentences
+        print(valid)
+        print(dp)
+        return dp[len(s)]
