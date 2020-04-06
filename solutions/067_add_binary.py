@@ -17,18 +17,22 @@ class Solution:
     def addBinary(self, a: str, b: str) -> str:
         ai = len(a) - 1
         bi = len(b) - 1
-        carry_over = 0
-        sol = []
-        while ai >= 0 or bi >= 0 or carry_over > 0:
-            total = carry_over
-            if ai >= 0:
-                total += int(a[ai])
-            if bi >= 0:
-                total += int(b[bi])
-            carry_over = total // 2
-            sol.append(str(total % 2))
+        carry = 0
+        ans = []
+        while ai >= 0 or bi >= 0 or carry > 0:
+            if ai >= 0 and a[ai] == '1':
+                carry += 1
+            if bi >= 0 and b[bi] == '1':
+                carry += 1
             
+            if carry % 2 == 1:
+                ans.append('1')
+            else:
+                ans.append('0')
+            
+            carry //= 2
             ai -= 1
             bi -= 1
         
-        return "".join(sol[::-1])
+        ans.reverse()
+        return "".join(ans)
