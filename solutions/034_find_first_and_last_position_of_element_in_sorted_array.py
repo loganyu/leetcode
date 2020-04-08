@@ -17,21 +17,36 @@ Output: [-1,-1]
 
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
-        left_idx = self.extreme_insertion_index(nums, target, True)
-        if left_idx == len(nums) or nums[left_idx] != target:
+        left = self.find_left_index(nums, target)
+        if left == len(nums) or nums[left] != target:
             return [-1, -1]
         
-        return [left_idx, self.extreme_insertion_index(nums, target, False)-1]
+        right = self.find_right_index(nums, target)
+        
+        return [left, right]
     
-    def extreme_insertion_index(self, nums, target, left):
+    def find_left_index(self, nums, target):
         lo = 0
         hi = len(nums)
         
         while lo < hi:
             mid = lo + (hi - lo) // 2
-            if nums[mid] > target or (left and target == nums[mid]):
+            if nums[mid] >= target:
+                hi = mid
+            else:
+                lo = mid + 1
+                
+        return lo
+    
+    def find_right_index(self, nums, target):
+        lo = 0
+        hi = len(nums)
+        
+        while lo < hi:
+            mid = lo + (hi - lo) // 2
+            if nums[mid] > target:
                 hi = mid
             else:
                 lo = mid + 1
         
-        return lo
+        return lo - 1
