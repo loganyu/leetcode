@@ -34,6 +34,8 @@ Can you solve it in O(N) time and O(1) space?
 # @param {String} s
 # @param {String} t
 # @return {Boolean}
+
+# O(1) space
 def backspace_compare(s, t)
     i = s.length - 1
     j = t.length - 1
@@ -63,7 +65,7 @@ def backspace_compare(s, t)
             end
         end
         
-        if i >= 0 && j >=0 && s[i] != t[j]
+        if i >= 0 && j >= 0 && s[i] != t[j]
             return false
         end
         if i >= 0 != j >= 0
@@ -76,8 +78,7 @@ def backspace_compare(s, t)
     return true
 end
 
-=begin
-O(n+m) space solution
+# O(n+m) space solution
 def backspace_compare(s, t)
     build(s) == build(t)
 end
@@ -93,5 +94,3 @@ def build(string)
     end
     ans.join
 end
-=end
-
