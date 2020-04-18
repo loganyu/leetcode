@@ -26,15 +26,14 @@ class Solution:
         total = 0
         mapping = {}
         mapping[0] = -1
-        for num, i in enumerate(nums):
+        for i, num in enumerate(nums):
             total += num
             if k != 0:
                 total %= k
-            if mapping[total]:
+            if total in mapping:
                 if i - mapping[total] >= 2:
                     return True
             else:
                 mapping[total] = i
         
         return False
-
