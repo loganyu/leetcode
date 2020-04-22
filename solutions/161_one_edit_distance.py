@@ -45,8 +45,6 @@ class Solution:
                 si += 1
                 ti += 1
             else:
-                if ti == nt:
-                    return True
                 if diff_found:
                     return False
                 diff_found = True
