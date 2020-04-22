@@ -14,7 +14,6 @@ The string will only contain lowercase characters a-z. The maximum length of the
 
 class Solution:
     def validPalindrome(self, s: str) -> bool:
-        deleted = False
         l = 0
         r = len(s) - 1
         while l < r:
