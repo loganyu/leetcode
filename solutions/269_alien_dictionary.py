@@ -61,7 +61,7 @@ class Solution:
                 continue
             if word1.startswith(word2):
                 return ""
-            wordLength = min(len(word1), len(word2))
+            wordLength = len(word1)
             for j in range(wordLength):
                 if word1[j] != word2[j]:
                     if word2[j] not in wordGraph[word1[j]]:
