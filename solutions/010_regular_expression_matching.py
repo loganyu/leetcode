@@ -59,3 +59,19 @@ class Solution:
         else:
             return first and self.isMatch(s[1:], p[1:])
 
+class Solution:
+    def isMatch(self, s: str, p: str) -> bool:
+        rows = len(s)
+        cols = len(p)
+        dp = [[False for _ in range(cols + 1)] for _ in range(rows + 1)]
+        dp[rows][cols] = True
+        for r in reversed(range(rows+1)):
+            for c in reversed(range(cols)):
+                first = r < rows and p[c] in (s[r], '.')
+                if c+1 < cols and p[c+1] == '*':
+                    dp[r][c] = dp[r][c+2] or (first and dp[r+1][c])
+                else:
+                    dp[r][c] = first and dp[r+1][c+1]
+        
+        return dp[0][0]
+

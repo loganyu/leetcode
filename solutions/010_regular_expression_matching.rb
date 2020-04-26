@@ -87,7 +87,3 @@ def is_match(s, p)
   end
   dp[0][0]
 end
-
-s = "aab"
-p = "a*"
-puts is_match(s, p)
