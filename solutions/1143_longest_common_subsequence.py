@@ -52,14 +52,14 @@ class Solution:
         if len(text2) < len(text1):
             text1, text2 = text2, text1
         prev_col = [0] * (len(text1) + 1)
+        curr_col = [0] * (len(text1) + 1)
         for r in reversed(range(len(text2))):
-            curr_col = [0] * (len(text1) + 1)
             for c in reversed(range(len(text1))):
                 if text2[r] == text1[c]:
                     curr_col[c] = 1 + prev_col[c + 1]
                 else:
                     curr_col[c] = max(prev_col[c], curr_col[c+1])
-            prev_col = curr_col
+            prev_col = curr_col[:]
         
         return prev_col[0]
                 
