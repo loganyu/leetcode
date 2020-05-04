@@ -45,7 +45,7 @@ p = "a*c?b"
 Output: false
 '''
 
-# Recursion with memorisation O(min(S,P)),  
+# Recursion with memoization O(min(S,P)),  
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
         p = self.remove_duplicate_stars(p)
