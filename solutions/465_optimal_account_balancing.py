@@ -60,7 +60,7 @@ class Solution:
                 net_profit[i] += net_profit[start_idx]
                 min_num_trans = self.traverse(net_profit, start_idx + 1, num_trans + 1)
                 net_profit[i] -= net_profit[start_idx]
-                
+
                 return min_num_trans
         
         min_num_trans = float("inf")
