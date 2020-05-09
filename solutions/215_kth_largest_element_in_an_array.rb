@@ -13,9 +13,27 @@ Note:
 You may assume k is always valid, 1 ≤ k ≤ array's length.
 =end
 
+require './min_heap'
+
 # @param {Integer[]} nums
 # @param {Integer} k
 # @return {Integer}
+
+# heap O(nlogk) time  and O(k) space
+def find_kth_largest(nums, k)
+    heap = MinHeap.new
+
+    nums.each do |num|
+        heap.add(num)
+        if heap.size > k
+            heap.poll()
+        end
+    end
+    
+    return heap.poll()
+end
+
+# quick select O(n^2) time and O(1) space
 def find_kth_largest(nums, k)
     left = 0
     right = nums.length - 1
