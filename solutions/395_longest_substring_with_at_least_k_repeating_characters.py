@@ -29,8 +29,6 @@ class Solution:
         if all(count >= k for _, count in counts.items()):
             return len(s)
         
-        excluded = set([char for char, count in counts.items() if count < k])
-        
         l = r = 0
         longest = 0
         while r < len(s):
