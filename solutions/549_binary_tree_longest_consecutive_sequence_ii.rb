@@ -55,12 +55,12 @@ def longest_path(node)
         if node.val == node.left.val + 1
             dcr = l[1] + 1
         elsif node.val == node.left.val - 1
-            inr = 1[0] + 1
+            inr = l[0] + 1
         end
     end
     if node.right
         r = longest_path(node.right)
-        if node.val = node.right.val + 1
+        if node.val == node.right.val + 1
             dcr = [dcr, r[1] + 1].max
         elsif node.val == node.right.val - 1
             inr = [inr, r[0] + 1].max
@@ -70,4 +70,3 @@ def longest_path(node)
     
     return [inr, dcr]
 end
-
