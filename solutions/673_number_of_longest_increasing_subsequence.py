@@ -20,18 +20,15 @@ class Solution:
         lengths = [1]*n
         counts = [1]*n
         
-        for j in range(n):
-            for i in range(j):
-                if nums[i] < nums[j]:
-                    if lengths[i] >= lengths[j]:
-                        lengths[j] = 1 + lengths[i]
-                        counts[j] = counts[i]
-                    elif lengths[i] + 1 == lengths[j]:
-                        counts[j] += counts[i]
+        for r in range(n):
+            for l in range(r):
+                if nums[l] < nums[r]:
+                    if lengths[l] >= lengths[r]:
+                        lengths[r] = 1 + lengths[l]
+                        counts[r] = counts[l]
+                    elif lengths[l] + 1 == lengths[r]:
+                        counts[r] += counts[l]
         
         longest = max(lengths)
-        print(lengths)
-        print(counts)
         
         return sum(c for i, c in enumerate(counts) if lengths[i] == longest) 
-
