@@ -88,3 +88,8 @@ class Solution:
                 rightmost = node.left
                 while rightmost.right:
                     rightmost = rightmost.right
+                rightmost.right = node.right
+                node.right = node.left
+                node.left = None
+            node = node.right 
+            
