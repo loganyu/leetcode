@@ -35,7 +35,6 @@ class Solution:
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
         a = []
-        l = 0
         for num in nums:
             i = bisect.bisect_left(a, num)
             if i == len(a):
