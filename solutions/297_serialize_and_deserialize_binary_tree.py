@@ -18,7 +18,6 @@ Clarification: The above format is the same as how LeetCode serializes a binary 
 
 Note: Do not use class member/global/static variables to store states. Your serialize and deserialize algorithms should be stateless.
 '''
-
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, x):
@@ -26,22 +25,25 @@ Note: Do not use class member/global/static variables to store states. Your seri
 #         self.left = None
 #         self.right = None
 
+
 from collections import deque
 
 class Codec:
 
     def serialize(self, root):
-        return self.rserialize(root, "")
-    
-    def rserialize(self, node, string):
-        if not node:
-            string += "None,"
-        else:
-            string += f"{node.val},"
-            string = self.rserialize(node.left, string)
-            string = self.rserialize(node.right, string)
+        string_builder = self.rserialize(root, [])
         
-        return string
+        return ",".join(string_builder)
+    
+    def rserialize(self, node, string_builder):
+        if not node:
+            string_builder.append("None")
+        else:
+            string_builder.append(str(node.val))
+            string_builder = self.rserialize(node.left, string_builder)
+            string_builder = self.rserialize(node.right, string_builder)
+        
+        return string_builder
             
 
     def deserialize(self, data):
@@ -56,8 +58,7 @@ class Codec:
         root.left = self.rdeserialize(dataList)
         root.right = self.rdeserialize(dataList)
         
-        return root
-        
+        return root 
 
 # Your Codec object will be instantiated and called as such:
 # codec = Codec()
