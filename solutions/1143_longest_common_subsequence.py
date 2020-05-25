@@ -46,7 +46,22 @@ class Solution:
         
         return memo_solve(0, 0)
         
-# dp
+# dp O(n*m) space
+class Solution:
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        rows = len(text1)
+        cols = len(text2)
+        dp = [[0 for _ in range(cols+1)] for _ in range(rows+1)]
+        for r in reversed(range(rows)):
+            for c in reversed(range(cols)):
+                if text1[r] == text2[c]:
+                    dp[r][c] = 1 + dp[r+1][c+1]
+                else:
+                    dp[r][c] = max(dp[r][c+1], dp[r+1][c])
+        
+        return dp[0][0]
+
+# dp O(n) space
 class Solution:
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
         if len(text2) < len(text1):
