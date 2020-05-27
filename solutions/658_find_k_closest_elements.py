@@ -15,13 +15,20 @@ Absolute value of elements in the array and x will not exceed 104
 
 class Solution:
     def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
-        l, r = 0, len(arr) - k
+        l = 0
+        r = len(arr) - k
         while l < r:
-            mid = l + (r - l) // 2
-            if x - arr[mid] > arr[mid + k] - x:
-                l = mid + 1
+            m = l + (r - l) // 2
+            if arr[m] == arr[m+k]:
+                if arr[m] == x:
+                    return arr[m:m+k]
+                if arr[m] > x:
+                    r = m
+                else:
+                    l = m + 1
+            elif abs(arr[m] - x) > abs(arr[m+k] - x):
+                l = m + 1
             else:
-                r = mid
-                
-        return arr[l:l+k]
+                r = m
 
+        return arr[l:l+k]
