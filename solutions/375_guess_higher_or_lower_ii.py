@@ -23,14 +23,15 @@ Given a particular n ≥ 1, find out how much money you need to have to guarante
 
 class Solution:
     def getMoneyAmount(self, n: int) -> int:
-        dp = [[0 for _ in range(n+1)] for _ in range(n+1)]
-        for l in range(2, n+1):
-            for s in range(1, n - l + 2):
-                minres = float('inf')
-                for piv in range(s, s + l - 1):
-                    res = piv + max(dp[s][piv-1], dp[piv+1][s+l-1])
-                    minres = min(minres, res)
-                dp[s][s+l-1] = minres
+        @lru_cache(maxsize=None)
+        def min_cost(low, high):
+            if low >= high:
+                return 0
+            min_res = float('inf')
+            for i in range((low+high)//2, high+1):
+                res = i + max(min_cost(low, i-1), min_cost(i+1, high))
+                min_res = min(min_res, res)
+            return min_res
         
-        return dp[1][n]
-                
+        return min_cost(1,n) 
+            lass Solution:
