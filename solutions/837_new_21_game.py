@@ -28,6 +28,7 @@ Answers will be accepted as correct if they are within 10^-5 of the correct answ
 The judging time limit has been reduced for this question.
 '''
 
+
 class Solution:
     def new21Game(self, N: int, K: int, W: int) -> float:
         if K == 0 or N >= K + W:
@@ -40,8 +41,5 @@ class Solution:
                 Wsum += dp[i]
             if i - W >= 0:
                 Wsum -= dp[i - W]
-                
-        print(dp)
-                
-        return sum(dp[K:])
 
+        return sum(dp[K:])
