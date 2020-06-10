@@ -54,15 +54,28 @@ Output:
 ]
 '''
 
+
 class Solution:
-    def fullJustify(self, words, maxWidth):
+    def fullJustify(self, words: List[str], maxWidth: int) -> List[str]:
         res, cur, num_of_letters = [], [], 0
         for w in words:
             if num_of_letters + len(w) + len(cur) > maxWidth:
-                for i in range(maxWidth - num_of_letters):
-                    cur[i%(len(cur)-1 or 1)] += ' '
-                res.append(''.join(cur))
+                if len(cur) == 1:
+                    spaces = maxWidth - num_of_letters
+                    res.append(cur[0] + ' ' * spaces)
+                else:
+                    num_spaces = maxWidth - num_of_letters
+                    spaces_between, spaces_extra = divmod(
+                        num_spaces, len(cur) - 1)
+                    line = []
+                    for i in range(len(cur)-1):
+                        line.append(cur[i])
+                        line.append(
+                            " " * (spaces_between + (i < spaces_extra)))
+                    line.append(cur[-1])
+
+                    res.append("".join(line))
                 cur, num_of_letters = [], 0
-            cur += [w]
+            cur.append(w)
             num_of_letters += len(w)
         return res + [' '.join(cur) + ' ' * (maxWidth - num_of_letters - (len(cur) - 1))]
