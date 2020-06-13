@@ -1,32 +1,26 @@
 =begin
-# @param {Integer[][]} points
-# @return {Integer}
-def min_area_rect(points)
-    columns = {}
-    points.each do |x,y|
-        columns[x] ||= []
-        columns[x] << y
-    end
-    last_x = {}
-    ans = Float::INFINITY
-    columns.keys.sort.each do |x|
-        column = columns[x].sort
-        column.each_with_index do |y2, i|
-            (0...i).each do |j|
-                y1 = column[j]
-                if last_x[[y1, y2]]
-                    ans = [ans, (x - last_x[[y1,y2]]) * (y2 - y1)].min
-                end
-                last_x[[y1,y2]] = x
-            end
-        end
-    end
-    if ans == Float::INFINITY
-        return 0
-    else
-        return ans
-    end
-end
+Given a set of points in the xy-plane, determine the minimum area of a rectangle formed from these points, with sides parallel to the x and y axes.
+
+If there isn't any rectangle, return 0.
+
+ 
+
+Example 1:
+
+Input: [[1,1],[1,3],[3,1],[3,3],[2,2]]
+Output: 4
+Example 2:
+
+Input: [[1,1],[1,3],[3,1],[3,3],[4,1],[4,3]]
+Output: 2
+ 
+
+Note:
+
+1 <= points.length <= 500
+0 <= points[i][0] <= 40000
+0 <= points[i][1] <= 40000
+All points are distinct.
 =end
 
 # @param {Integer[][]} points
@@ -59,8 +53,7 @@ def min_area_rect(points)
     return min == Float::INFINITY ? 0 : min
 end
 
-=begin
-Runtime error when using diagonals approach
+# Runtime error when using diagonals approach
 # @param {Integer[][]} points
 # @return {Integer}
 def min_area_rect(points)
@@ -83,5 +76,4 @@ def min_area_rect(points)
         return ans
     end         
 end
-=end
 
