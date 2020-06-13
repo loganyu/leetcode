@@ -31,7 +31,6 @@ randomSet.insert(2);
 randomSet.getRandom();
 '''
 
-import random
 
 class RandomizedSet:
 
@@ -40,44 +39,40 @@ class RandomizedSet:
         Initialize your data structure here.
         """
         self.nums = []
-        self.indexByNum = {}
-        
+        self.index_by_num = {}
 
     def insert(self, val: int) -> bool:
         """
         Inserts a value to the set. Returns true if the set did not already contain the specified element.
         """
-        if val in self.indexByNum:
+        if val in self.index_by_num:
             return False
+
         self.nums.append(val)
-        index = len(self.nums) - 1
-        self.indexByNum[val] = index
+        self.index_by_num[val] = len(self.nums) - 1
         return True
 
     def remove(self, val: int) -> bool:
         """
         Removes a value from the set. Returns true if the set contained the specified element.
         """
-        if val not in self.indexByNum:
+        if val not in self.index_by_num:
             return False
 
-        index = self.indexByNum[val]
-        last = self.nums[-1]
-        self.nums[index] = last
-        
-        self.indexByNum[last] = index
-        self.indexByNum.pop(val)
+        last_index = len(self.nums) - 1
+        last_val = self.nums[-1]
+        index = self.index_by_num[val]
+        self.nums[index] = last_val
+        self.index_by_num[last_val] = index
         self.nums.pop()
-        return True 
+        del self.index_by_num[val]
+        return True
 
     def getRandom(self) -> int:
         """
         Get a random element from the set.
         """
-        if len(self.nums) > 0:
-            return random.choice(self.nums)
-        else:
-            return None
+        return random.choice(self.nums)
 
 
 # Your RandomizedSet object will be instantiated and called as such:
@@ -85,4 +80,3 @@ class RandomizedSet:
 # param_1 = obj.insert(val)
 # param_2 = obj.remove(val)
 # param_3 = obj.getRandom()
-
