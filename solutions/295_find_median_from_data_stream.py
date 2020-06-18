@@ -29,6 +29,7 @@ If 99% of all integer numbers from the stream are between 0 and 100, how would y
 
 from heapq import *
 
+
 class MedianFinder:
 
     def __init__(self):
@@ -43,10 +44,9 @@ class MedianFinder:
         minHeap = self.minHeap
         heappush(maxHeap, -num)
         heappush(minHeap, -heappop(maxHeap))
-        
+
         if len(maxHeap) < len(minHeap):
             heappush(maxHeap, -heappop(minHeap))
-        
 
     def findMedian(self) -> float:
         maxHeap = self.maxHeap
@@ -54,8 +54,7 @@ class MedianFinder:
         if len(maxHeap) > len(minHeap):
             return -maxHeap[0]
         else:
-            return (minHeap[0] + -maxHeap[0])/2.0
-        
+            return (minHeap[0] + -maxHeap[0])/2
 
 
 # Your MedianFinder object will be instantiated and called as such:
@@ -63,7 +62,6 @@ class MedianFinder:
 # obj.addNum(num)
 # param_2 = obj.findMedian()
 
-from heapq import *
 
 class MedianFinder:
 
@@ -75,16 +73,14 @@ class MedianFinder:
 
     def addNum(self, num: int) -> None:
         bisect.insort(self.nums, num)
-        
 
     def findMedian(self) -> float:
         nums = self.nums
         l = len(nums)
         if l % 2 == 0:
-            return (nums[l//2] + nums[l//2 - 1])/2.0
+            return (nums[l//2] + nums[l//2 - 1])/2
         else:
             return nums[l//2]
-        
 
 
 # Your MedianFinder object will be instantiated and called as such:
