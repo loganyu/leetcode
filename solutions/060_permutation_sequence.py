@@ -33,14 +33,14 @@ class Solution:
             nums.append(str(i+1))
         
         k -= 1
-        
+
         output = []
-        for i in reversed(range(n)):
-            idx = k // factorials[i]
-            k -= idx * factorials[i]
-            
+        for i in range(n):
+            idx = k // factorials[n-i]
             output.append(nums[idx])
+
+            k -= idx * factorials[i]
             del nums[idx]
-        
+
         return ''.join(output)
-        
+
