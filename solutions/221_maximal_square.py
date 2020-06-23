@@ -13,6 +13,29 @@ Input:
 Output: 4
 '''
 
+# O(n*m) time and O(m) space
+class Solution:
+    def maximalSquare(self, matrix: List[List[str]]) -> int:
+        if len(matrix) == 0:
+            return 0
+        n = len(matrix)
+        m = len(matrix[0])
+        dp = [0 for _ in range(m+1)]
+        max_len = 0
+        prev = 0
+        for r in range(1, n+1):
+            for c in range(1, m+1):
+                temp = dp[c]
+                if matrix[r-1][c-1] == '1':
+                    dp[c] = min(prev, dp[c-1], dp[c]) + 1
+                    max_len = max(max_len, dp[c])
+                else:
+                    dp[c] = 0
+                prev = temp
+
+        return max_len**2
+
+# O(n*m) time and O(n*m) time
 class Solution:
     def maximalSquare(self, matrix: List[List[str]]) -> int:
         if len(matrix) == 0:
