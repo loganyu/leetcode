@@ -37,7 +37,7 @@ def split_array(nums, m)
         end
     end
     
-return lo
+    return lo
 end
 
 def split(nums, largest_sum)

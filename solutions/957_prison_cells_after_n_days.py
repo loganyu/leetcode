@@ -49,13 +49,13 @@ class Solution:
             if cell_tuple in seen:
                 N = N % (seen[cell_tuple] - N)
             seen[cell_tuple] = N
-            
+
             if N >= 1:
                 cells = self.next_day(cells)
                 N -= 1
-            
+
         return cells
-    
+
     def next_day(self, cells):
         next_cells = []
         for i in range(len(cells)):
@@ -63,6 +63,6 @@ class Solution:
                 next_cells.append(0)
             else:
                 next_cells.append(1)
-                
+
         return next_cells
 
