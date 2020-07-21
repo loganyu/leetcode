@@ -17,6 +17,7 @@ Given word = "SEE", return true.
 Given word = "ABCB", return false.
 '''
 
+
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         n = len(board)
@@ -27,20 +28,20 @@ class Solution:
                     if self.search(r, c, board, word):
                         return True
         return False
-    
+
     def search(self, r, c, board, word):
         if len(word) == 0:
             return True
         if r < 0 or r >= len(board) or c < 0 or c >= len(board[0]) or board[r][c] != word[0]:
             return False
-        
+
         tmp = board[r][c]
         board[r][c] = None
         word = word[1:]
-        
-        exists = self.search(r+1, c, board, word) or self.search(r-1, c, board, word) or self.search(r, c+1, board, word) or self.search(r, c-1, board, word)
-        
-        board[r][c] = tmp
-        
-        return exists
 
+        exists = self.search(r+1, c, board, word) or self.search(r-1, c, board,
+                                                                 word) or self.search(r, c+1, board, word) or self.search(r, c-1, board, word)
+
+        board[r][c] = tmp
+
+        return exists

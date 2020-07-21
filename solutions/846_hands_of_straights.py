@@ -29,6 +29,7 @@ Note: This question is the same as 1296: https://leetcode.com/problems/divide-ar
 
 from collections import Counter
 
+
 class Solution:
     def isNStraightHand(self, hand: List[int], W: int) -> bool:
         count = Counter(hand)
@@ -42,6 +43,5 @@ class Solution:
                     del count[k]
                 else:
                     count[k] = v - 1
-        
+
         return True
-        
