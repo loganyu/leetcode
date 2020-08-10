@@ -28,7 +28,6 @@ Output: 701
 # @param {String} s
 # @return {Integer}
 def title_to_number(s)
-    length = s.length
     num = 0
     s.each_char.with_index do |char, i|
         num = num * 26 + (char.ord - 'A'.ord + 1)
