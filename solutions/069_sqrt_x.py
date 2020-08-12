@@ -19,19 +19,6 @@ Explanation: The square root of 8 is 2.82842..., and since
 
 class Solution:
     def mySqrt(self, x: int) -> int:
-        l = 0
-        r = x
-        while l <= r:
-            m = r - (r-l)//2
-            if m**2 <= x < (m+1)**2:
-                return m
-            elif x < m**2:
-                r = m - 1
-            else:
-                l = m + 1
-
-class Solution:
-    def mySqrt(self, x: int) -> int:
         left, right = 0, x+1
         while left < right:
             mid = left + (right - left) // 2
