@@ -38,4 +38,19 @@ class Solution:
             else:
                 l = mid + 1
 
-                
+class Solution:
+    def firstBadVersion(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        l = 1
+        r = n
+        while l < r:
+            mid = l + (r-l)//2
+            if isBadVersion(mid):
+                r = mid 
+            else:
+                l =  mid + 1
+            
+        return l
