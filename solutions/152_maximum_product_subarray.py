@@ -13,12 +13,13 @@ Output: 0
 Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
 '''
 
+
 class Solution:
     def maxProduct(self, nums: List[int]) -> int:
         max_prod = low = high = nums[0]
         for num in nums[1:]:
-            high, low = max(high*num, low*num, num), min(high*num, low*num, num)
+            high, low = max(high*num, low*num,
+                            num), min(high*num, low*num, num)
             max_prod = max(max_prod, high)
-        
-        return max_prod
 
+        return max_prod
