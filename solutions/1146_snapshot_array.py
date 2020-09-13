@@ -29,24 +29,27 @@ At most 50000 calls will be made to set, snap, and get.
 0 <= val <= 10^9
 '''
 
-class SnapshotArray:
+from collections import defaultdict
 
-    def __init__(self, length: int):
-        self.A = [[[-1, 0]] for _ in range(length)]
+
+class SnapshotArray(object):
+    def __init__(self, length):
+        self.dic = defaultdict(dict)
         self.snap_id = 0
-        
-    def set(self, index: int, val: int) -> None:
-        self.A[index].append([self.snap_id, val])
 
-    def snap(self) -> int:
+    def set(self, index, val):
+        self.dic[self.snap_id][index] = val
+
+    def snap(self):
         self.snap_id += 1
+        self.dic[self.snap_id] = self.dic[self.snap_id - 1].copy()
         return self.snap_id - 1
 
-    def get(self, index: int, snap_id: int) -> int:
-        i = bisect.bisect_right(self.A[index], [snap_id + 1]) - 1
-        return self.A[index][i][1]
-        
-
+    def get(self, index, snap_id):
+        if index in self.dic[snap_id]:
+            return self.dic[snap_id][index]
+        else:
+            return 0
 
 # Your SnapshotArray object will be instantiated and called as such:
 # obj = SnapshotArray(length)
