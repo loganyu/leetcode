@@ -17,7 +17,39 @@ What should we return when needle is an empty string? This is a great question t
 
 For the purpose of this problem, we will return 0 when needle is an empty string. This is consistent to C's strstr() and Java's indexOf().
 '''
+# O(n) time KMP
 
+
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        if not needle:
+            return 0
+        b = [0] * len(needle)
+        i, j = 1, 0
+        while i < len(needle):
+            if needle[i] == needle[j]:
+                b[i] = j+1
+                i += 1
+                j += 1
+            elif j > 0:
+                j = b[j-1]
+            else:
+                i += 1
+
+        i = j = 0
+        while i < len(haystack) and j < len(needle):
+            if haystack[i] == needle[j]:
+                i += 1
+                j += 1
+            elif j > 0:
+                j = b[j-1]
+            else:
+                i += 1
+
+        return i - j if j == len(needle) else -1
+
+
+# O(n^2) time
 class Solution:
     def strStr(self, haystack: str, needle: str) -> int:
         n = len(haystack)
@@ -27,5 +59,5 @@ class Solution:
         for i in range(n-m+1):
             if haystack[i] == needle[0] and haystack[i:i+m] == needle:
                 return i
-        
+
         return -1
