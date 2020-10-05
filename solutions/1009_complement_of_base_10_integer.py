@@ -30,15 +30,18 @@ Note:
 This question is the same as 476: https://leetcode.com/problems/number-complement/
 '''
 
+
 class Solution:
     def bitwiseComplement(self, N: int) -> int:
+        if N == 0:
+            return 1
+
         left = N
         bit = 1
-        
+
         while left:
             N = N ^ bit
             bit = bit << 1
             left = left >> 1
-        
+
         return N
-    
