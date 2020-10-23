@@ -20,8 +20,26 @@ Note:
 A is a mountain, as defined above.
 '''
 
+# O(N) time
+
+
 class Solution:
     def peakIndexInMountainArray(self, A: List[int]) -> int:
         for i in range(1, len(A)-1):
             if A[i-1] < A[i] > A[i+1]:
                 return i
+
+# O(log(N)) time
+
+
+class Solution:
+    def peakIndexInMountainArray(self, arr: List[int]) -> int:
+        lo, hi = 0, len(arr) - 1
+        while lo < hi:
+            mi = (lo + hi) // 2
+            if arr[mi] < arr[mi+1]:
+                lo = mi + 1
+            else:
+                hi = mi
+
+        return lo
