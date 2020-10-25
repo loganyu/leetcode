@@ -25,18 +25,22 @@ Note:
 Both str1 and str2 contain only lowercase English letters.
 '''
 
+
 class Solution:
     def canConvert(self, str1: str, str2: str) -> bool:
         if str1 == str2:
             return True
+        if len(set(str2)) == 26:
+            return False
         m = {}
         for i in range(len(str1)):
             if str1[i] not in m:
                 m[str1[i]] = str2[i]
             elif m[str1[i]] != str2[i]:
                 return False
-        return len(set(str2)) < 26
-        
+        return True
+
+
 class Solution:
     def canConvert(self, str1: str, str2: str) -> bool:
         G = {}
@@ -71,6 +75,5 @@ class Solution:
                 G.pop(a)
             else:
                 return False
-            
+
         return True
-        
