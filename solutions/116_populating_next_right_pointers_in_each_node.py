@@ -22,7 +22,7 @@ Input: {"$id":"1","left":{"$id":"2","left":{"$id":"3","left":null,"next":null,"r
 Output: {"$id":"1","left":{"$id":"2","left":{"$id":"3","left":null,"next":{"$id":"4","left":null,"next":{"$id":"5","left":null,"next":{"$id":"6","left":null,"next":null,"right":null,"val":7},"right":null,"val":6},"right":null,"val":5},"right":null,"val":4},"next":{"$id":"7","left":{"$ref":"5"},"next":null,"right":{"$ref":"6"},"val":3},"right":{"$ref":"4"},"val":2},"next":null,"right":{"$ref":"7"},"val":1}
 
 Explanation: Given the above perfect binary tree (Figure A), your function should populate each next pointer to point to its next right node, just like in Figure B.
- 
+
 
 Note:
 
@@ -39,21 +39,20 @@ class Node:
         self.right = right
         self.next = next
 """
+
+
 class Solution:
     def connect(self, root: 'Node') -> 'Node':
-        node = root
-        temp = Node(None, None, None, None)
-        curr = temp
-        while node:
-            curr.next = node.left
-            if curr.next:
-                curr = curr.next
-            curr.next = node.right
-            if curr.next:
-                curr = curr.next
-            node = node.next
-            if not node:
-                curr = temp
-                node = temp.next
+        if not root:
+            return root
+        leftmost = root
+        while leftmost.left:
+            head = leftmost
+            while head:
+                head.left.next = head.right
+                if head.next:
+                    head.right.next = head.next.left
+                head = head.next
+            leftmost = leftmost.left
+
         return root
-        
