@@ -37,18 +37,18 @@ Return false.
 #         self.left = None
 #         self.right = None
 
+
 class Solution:
     def isBalanced(self, root: TreeNode) -> bool:
         return self.check(root)[1]
-    
+
     def check(self, node):
         if node == None:
             return (0, True)
         l_depth, l_balanced = self.check(node.left)
         r_depth, r_balanced = self.check(node.right)
-        
+
         depth = max(l_depth, r_depth) + 1
         balanced = l_balanced and r_balanced and abs(l_depth - r_depth) <= 1
-        
-        return (depth, balanced)
 
+        return (depth, balanced)
