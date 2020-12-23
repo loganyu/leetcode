@@ -26,11 +26,14 @@ class Solution:
         i = len(nums) - 2
         while i >= 0 and nums[i+1] <= nums[i]:
             i -= 1
-        if i >= 0:
-            j = len(nums) - 1
-            while nums[i] >= nums[j]:
-                j -= 1
-            nums[i], nums[j] = nums[j], nums[i]
+        
+        if i < 0:
+            return -1
+            
+        j = len(nums) - 1
+        while nums[i] >= nums[j]:
+            j -= 1
+        nums[i], nums[j] = nums[j], nums[i]
 
         s = i + 1
         e = len(nums) - 1
@@ -40,7 +43,7 @@ class Solution:
             e -= 1
         
         res = int(''.join(nums))
-        if res >= 2**31 or res <= n:
+        if res >= 2**31:
             return -1
         return res
     
