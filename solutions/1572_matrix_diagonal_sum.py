@@ -39,11 +39,9 @@ class Solution:
         n = len(mat)
         S = 0
         for i in range(n):
-            S += mat[i][i]
-            S += mat[i][n-i-1]
-        
+            S += mat[i][i] + mat[i][n-i-1]
         if n % 2 == 1:
             S -= mat[n//2][n//2]
-            
-        return S 
-    
+        
+        return S
+        
