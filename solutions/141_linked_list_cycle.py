@@ -46,7 +46,7 @@ class Solution(object):
         :type head: ListNode
         :rtype: bool
         """
-        if head == None or head.next == None:
+        if head == None:
             return False
         slow = head
         fast = head.next
