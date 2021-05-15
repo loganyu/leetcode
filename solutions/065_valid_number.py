@@ -35,13 +35,13 @@ class Solution:
         s = s.strip()
         for i, char in enumerate(s):
             if char in "+-":
-                if i > 0 and s[i-1] != 'e':
+                if i > 0 and s[i-1].lower() != 'e':
                     return False
             elif char == '.':
                 if has_dot or has_e:
                     return False
                 has_dot = True
-            elif char == 'e':
+            elif char.lower() == 'e':
                 if has_e or not has_digit:
                     return False
                 has_e = True
