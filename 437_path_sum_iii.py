@@ -73,3 +73,23 @@ class Solution:
         
         return self.count
         
+class Solution:
+    def pathSum(self, root: TreeNode, targetSum: int) -> int:
+        if not root:
+            return 0
+        memo = defaultdict(int)
+        memo[0] = 1
+        
+        return self.find_paths(root, 0, targetSum, memo)
+        
+    def find_paths(self, curr, currSum, targetSum, memo):
+        if not curr:
+            return 0
+        currSum += curr.val
+        numPathsToCurr = memo[currSum - targetSum]
+        memo[currSum] += 1
+        res = numPathsToCurr + self.find_paths(curr.left, currSum, targetSum, memo) + self.find_paths(curr.right, currSum, targetSum, memo)
+        memo[currSum] -= 1
+        
+        return res
+
