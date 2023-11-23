@@ -28,12 +28,24 @@ Constraints:
 
 class Solution:
     def countNicePairs(self, nums: List[int]) -> int:
-        res = 0
-        count = Counter()
-        for num in nums:
-            rev = int(str(num)[::-1])
-            res += count[num - rev]
-            count[num - rev] += 1
-            
-        return res % (10**9 + 7)
-        
+        def rev(num):
+            result = 0
+            while num:
+                result = result * 10 + num % 10
+                num //= 10
+
+            return result
+
+        arr = []
+        for i in range(len(nums)):
+            arr.append(nums[i] - rev(nums[i]))
+
+        dic = defaultdict(int)
+        ans = 0
+        MOD = 10 ** 9 + 7
+        for num in arr:
+            ans = (ans + dic[num]) % MOD
+            dic[num] += 1
+
+        return ans
+
