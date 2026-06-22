@@ -36,11 +36,25 @@ costs.length == n
 
 class Solution:
     def maxIceCream(self, costs: List[int], coins: int) -> int:
-        costs.sort()
-        for i, cost in enumerate(costs):
-            if cost > coins:
-                return i
-            coins -= cost
-            
-        return len(costs)
+        if not costs or coins == 0:
+            return 0
+        max_cost = max(costs)
+        count = [0] * (max_cost + 1)
+        for cost in costs:
+            count[cost] += 1
+        bars_bought = 0
+        for price in range(1, max_cost + 1):
+            if count[price] == 0:
+                continue
+            if coins < price:
+                break
+            max_can_buy = coins // price
+            actual_buy = min(count[price], max_can_buy)
+
+            bars_bought += actual_buy
+            coins -= actual_buy * price
+
+        return bars_bought
+
+
         
